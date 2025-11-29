@@ -28,7 +28,7 @@ cocoabench/
 
 Edit `assets/data/data.json` and add a new entry:
 
-```json
+```js
 {
     "rank": 7,
     "model": "Model-Name",
