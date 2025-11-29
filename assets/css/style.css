@@ -409,11 +409,11 @@ tbody tr:hover .score-cell {
 }
 
 .result-block.pass {
-    background: #5cb85c;
+    background: #66BB6A;
 }
 
 .result-block.fail {
-    background: #e07a7a;
+    background: #EF5350;
 }
 
 /* Column hover effect */
@@ -466,5 +466,5 @@ thead th.col-hover {
 }
 
 .copy-btn .check-icon {
-    color: #5cb85c;
+    color: #66BB6A;
 }
