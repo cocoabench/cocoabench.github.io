@@ -43,6 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const table = document.querySelector('.table-wrapper table');
         if (!table) return;
 
+        // Only enable column hover on devices that support hover (not touch)
+        const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        if (!hasHover) return;
+
         // Add data-col to header cells
         const headerCells = table.querySelectorAll('thead th');
         headerCells.forEach((th, index) => {
