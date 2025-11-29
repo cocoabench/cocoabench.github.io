@@ -1,0 +1,470 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@500;600;700&display=swap');
+
+:root {
+    --font-main: "Iowan Old Style", "Iowan Old Style BT", Georgia, serif;
+    --font-logo: "Iowan Old Style", "Iowan Old Style BT", Georgia, serif;
+    --font-mono: "JetBrains Mono", "Courier New", monospace;
+    --color-text: #1a1a1a;
+    --color-link: #1a1a1a;
+    --color-bg: #ffffff;
+    --color-accent: #e5e5e5;
+    --width-content: 720px; /* content width */
+    --width-wide: 1200px;   /* leaderboard width */
+    
+    /* Logo colors */
+    --cocoa-dark: #3E2723;
+    --cocoa-mid: #5D4037;
+    --cocoa-light: #8D6E63;
+    --wire-sketch: #795548;
+    --bench-text: #64748B;
+    --ease-draw: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+header {
+    padding: 40px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: var(--width-wide);
+    margin: 0 auto;
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.logo-icon {
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+
+.logo-icon svg {
+    width: 40px;
+    height: 40px;
+    overflow: visible;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.logo .text-group {
+    font-family: var(--font-logo);
+    font-size: 26px;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+.logo .cocoa {
+    background: linear-gradient(135deg, var(--cocoa-dark), var(--cocoa-mid));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.logo .bench {
+    color: var(--bench-text);
+    font-weight: 600;
+    transition: color 0.3s, transform 0.3s;
+    display: inline-block;
+}
+
+/* SVG Solid Layer */
+.solid-group {
+    opacity: 1;
+    transition: opacity 0.2s ease-out;
+}
+
+.logo:hover .solid-group {
+    opacity: 0;
+    transition: opacity 0.4s ease-out;
+}
+
+/* SVG Wire Layer */
+.wire-path {
+    fill: none;
+    stroke: var(--wire-sketch);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+    opacity: 0;
+    transition: stroke-dashoffset 0.2s ease-out, opacity 0.2s;
+}
+
+.logo:hover .wire-path {
+    stroke-dashoffset: 0;
+    opacity: 1;
+    transition: stroke-dashoffset 1.2s var(--ease-draw), opacity 0.2s;
+}
+
+/* Text animation on hover */
+.logo:hover .bench {
+    color: var(--cocoa-mid);
+    transform: translateX(4px);
+}
+
+/* SVG fill colors */
+.pod-body { fill: var(--cocoa-mid); }
+.pod-ridge-left { fill: var(--cocoa-light); }
+.pod-ridge-right { fill: var(--cocoa-dark); }
+
+nav a {
+    margin-left: 35px;
+    text-decoration: none;
+    color: #888;
+    font-family: var(--font-main);
+    font-size: 17px;
+    position: relative;
+    transition: color 0.2s;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 1.5px;
+    background: var(--color-text);
+    transition: width 0.25s ease;
+}
+
+nav a:hover::after, nav a.active::after {
+    width: 100%;
+}
+
+nav a:hover, nav a.active {
+    color: var(--color-text);
+}
+
+.container {
+    max-width: var(--width-content);
+    margin: 60px auto 100px;
+    padding: 0 20px;
+}
+
+.container-wide {
+    max-width: var(--width-wide);
+    margin: 60px auto 100px;
+    padding: 0 20px;
+}
+
+h1 {
+    font-size: 42px;
+    font-weight: normal;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    font-size: 20px;
+    margin-bottom: 50px;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: normal;
+    margin-top: 40px;
+    border-bottom: 1px solid var(--color-text);
+    padding-bottom: 10px;
+}
+
+p {
+    font-size: 18px;
+    margin-bottom: 24px;
+}
+
+a {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+}
+
+a:hover {
+    color: #555;
+}
+
+.resource-links {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    margin: 50px 0;
+}
+
+.resource-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    text-decoration: none;
+    font-size: 16px;
+    color: var(--color-text);
+    background: #f8f8f8;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.resource-link:hover {
+    background: var(--color-text);
+    color: #fff;
+}
+
+.resource-link svg {
+    flex-shrink: 0;
+}
+
+/* Table wrapper for horizontal scroll */
+.table-wrapper {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-main);
+    min-width: 900px;
+}
+
+th, td {
+    text-align: left;
+    padding: 12px 10px;
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+thead th {
+    font-weight: bold;
+    border-top: 2px solid var(--color-text);
+    border-bottom: 1px solid var(--color-text);
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--color-text);
+}
+
+tbody tr {
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.15s ease;
+}
+
+tbody tr:hover {
+    background-color: #fafafa;
+}
+
+tbody tr:hover .rank-cell,
+tbody tr:hover .model-name,
+tbody tr:hover .score-cell {
+    background-color: #fafafa;
+}
+
+.model-name {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.model-logo {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.score {
+    font-family: var(--font-main);
+    font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* Leaderboard Legend */
+.leaderboard-legend {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    color: #666;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.legend-item .result-block {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+}
+
+.legend-note {
+    margin-left: auto;
+    font-style: italic;
+}
+
+/* Sticky columns */
+.rank-cell,
+.model-name,
+.score-cell,
+.th-rank,
+.th-model,
+.th-score {
+    position: sticky;
+    background: #fff;
+    z-index: 1;
+}
+
+.th-rank,
+.th-model,
+.th-score {
+    z-index: 2;
+    background: #fff;
+}
+
+.rank-cell,
+.th-rank {
+    left: 0;
+    min-width: 40px;
+}
+
+.model-name,
+.th-model {
+    left: 40px;
+    min-width: 180px;
+}
+
+.score-cell,
+.th-score {
+    left: 220px;
+    min-width: 70px;
+    border-right: 1px solid #eee;
+}
+
+/* Table cells */
+.rank-cell {
+    font-variant-numeric: tabular-nums;
+    color: #888;
+}
+
+.score-cell {
+    font-weight: bold;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Result columns */
+.th-result {
+    text-align: center;
+    min-width: 32px;
+    width: 32px;
+    padding: 12px 1px;
+    font-size: 12px;
+    color: #999;
+    font-weight: normal;
+}
+
+.result-cell {
+    text-align: center;
+    padding: 3px 1px;
+    width: 32px;
+    min-width: 32px;
+}
+
+/* Result blocks */
+.result-block {
+    display: block;
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    margin: 0 auto;
+}
+
+.result-block:hover {
+    transform: scale(1.15);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 1;
+    position: relative;
+}
+
+.result-block.pass {
+    background: #5cb85c;
+}
+
+.result-block.fail {
+    background: #e07a7a;
+}
+
+/* Column hover effect */
+.col-hover {
+    background-color: #f5f5f5;
+}
+
+thead th.col-hover {
+    background-color: #eee;
+}
+
+/* Citation block */
+.citation-block {
+    position: relative;
+    background: #f9f9f9;
+    border-left: 3px solid #333;
+    margin: 20px 0;
+}
+
+.citation-block pre {
+    margin: 0;
+    padding: 20px;
+    padding-right: 50px;
+    font-size: 12px;
+    font-family: var(--font-mono);
+    overflow-x: auto;
+    line-height: 1.5;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 6px 8px;
+    cursor: pointer;
+    color: #666;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copy-btn:hover {
+    background: #f0f0f0;
+    border-color: #ccc;
+    color: #333;
+}
+
+.copy-btn .check-icon {
+    color: #5cb85c;
+}
