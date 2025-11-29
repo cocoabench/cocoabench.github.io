@@ -8,7 +8,7 @@
     --color-link: #1a1a1a;
     --color-bg: #ffffff;
     --color-accent: #e5e5e5;
-    --width-content: 840px; /* content width */
+    --width-content: 720px; /* content width */
     --width-wide: 1200px;   /* leaderboard width */
     
     /* Logo colors */
@@ -484,6 +484,207 @@ thead th.col-hover {
     line-height: 1.5;
 }
 
+/* Content tables (in body text) */
+.content-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 15px;
+    min-width: auto;
+}
+
+.content-table th,
+.content-table td {
+    padding: 12px 16px;
+    text-align: left;
+}
+
+.content-table th {
+    font-weight: 600;
+    color: var(--color-text);
+    background: transparent;
+    border-top: 2px solid var(--color-text);
+    border-bottom: 1px solid var(--color-text);
+    font-size: 14px;
+}
+
+.content-table tbody tr {
+    border-bottom: 1px solid #eee;
+    transition: background 0.15s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .content-table tbody tr:hover {
+        background: #fafafa;
+    }
+}
+
+/* Code blocks (in body text) - with Prism.js */
+.code-block-wrapper {
+    position: relative;
+    margin: 24px 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.code-block-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    background: #f8f8f8;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.code-block-lang {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+.code-copy-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: var(--font-main);
+    font-size: 12px;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .code-copy-btn:hover {
+        background: #f0f0f0;
+        border-color: #ccc;
+        color: #333;
+    }
+}
+
+.code-copy-btn.copied {
+    color: #22863a;
+    border-color: #22863a;
+    background: #f0fff4;
+}
+
+.code-block {
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    border: none;
+}
+
+/* Code block styles - high specificity to override Prism.js */
+.code-block-wrapper .code-block {
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+    overflow: hidden;
+}
+
+.code-block-wrapper pre.code-block[class*="language-"] {
+    padding: 12px 14px;
+    margin: 0;
+    background: transparent;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.5;
+    overflow-x: auto;
+}
+
+.code-block-wrapper .code-block code,
+.code-block-wrapper .code-block code[class*="language-"] {
+    display: block;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Custom syntax colors to match our theme */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: #6a737d;
+}
+
+.token.punctuation {
+    color: #24292e;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #005cc5;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #22863a;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #d73a49;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #d73a49;
+}
+
+.token.function,
+.token.class-name {
+    color: #6f42c1;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #e36209;
+}
+
+/* Math blocks */
+.math-block {
+    text-align: center;
+    margin: 24px 0;
+    overflow-x: auto;
+}
+
+/* h3 styling */
+h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 16px;
+}
+
 /* Citation block */
 .citation-block {
     position: relative;
@@ -576,10 +777,13 @@ thead th.col-hover {
    ============================================ */
 
 .example-showcase {
+    /* Breakout from container - center on screen */
+    width: min(900px, calc(100vw - 40px));
+    max-width: min(900px, calc(100vw - 40px));
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
     margin: 50px 0;
-    background: #f8f8f8;
-    border-radius: 12px;
-    overflow: hidden;
 }
 
 /* Tabs wrapper for horizontal scroll on mobile */
@@ -587,6 +791,9 @@ thead th.col-hover {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    text-align: center;
+    padding: 0 20px;
+    margin-bottom: 24px;
 }
 
 .example-tabs-wrapper::-webkit-scrollbar {
@@ -594,58 +801,43 @@ thead th.col-hover {
 }
 
 .example-tabs {
-    display: flex;
-    gap: 0;
+    display: inline-flex;
+    gap: 8px;
     padding: 0;
-    border-bottom: 1px solid #e5e5e5;
     min-width: max-content;
 }
 
 .example-tab {
-    padding: 16px 28px;
+    padding: 12px 24px;
     background: transparent;
     border: none;
+    border-radius: 24px;
     font-family: var(--font-main);
     font-size: 15px;
+    font-weight: 500;
     color: #666;
     cursor: pointer;
     transition: all 0.2s ease;
-    position: relative;
     white-space: nowrap;
-}
-
-.example-tab::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--cocoa-mid);
-    transform: scaleX(0);
-    transition: transform 0.2s ease;
 }
 
 .example-tab.active {
     color: var(--color-text);
-    background: #fff;
-}
-
-.example-tab.active::after {
-    transform: scaleX(1);
+    background: #f0f0f0;
 }
 
 @media (hover: hover) and (pointer: fine) {
     .example-tab:hover {
         color: var(--color-text);
-        background: rgba(255, 255, 255, 0.5);
+        background: #f5f5f5;
     }
 }
 
 /* Panels */
 .example-panels {
     padding: 32px;
-    background: #f8f8f8;
+    background: #f5f5f5;
+    border-radius: 16px;
 }
 
 .example-panel {
@@ -820,16 +1012,18 @@ thead th.col-hover {
 }
 
 .reasoning-content pre {
-    background: #1a1a1a;
-    color: #f0f0f0;
+    background: #f8f8f8;
+    color: #333;
     padding: 16px 20px;
-    border-radius: 6px;
+    border-radius: 8px;
+    border: 1px solid #e5e5e5;
     overflow-x: auto;
     margin: 16px 0;
 }
 
 .reasoning-content pre code {
     background: none;
+    color: #333;
     padding: 0;
     font-size: 13px;
     color: inherit;
@@ -978,17 +1172,21 @@ thead th.col-hover {
 
     /* Example showcase responsive */
     .example-showcase {
-        margin: 32px -12px;
-        border-radius: 0;
+        width: calc(100vw - 24px);
+        max-width: calc(100vw - 24px);
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 32px 0;
     }
 
     .example-tab {
-        padding: 14px 20px;
+        padding: 10px 18px;
         font-size: 14px;
     }
 
     .example-panels {
         padding: 20px 16px;
+        border-radius: 12px;
     }
 
     .example-content {
@@ -1023,18 +1221,19 @@ thead th.col-hover {
         padding: 20px 16px;
     }
 
+    /* Keep logo readable on mobile - don't shrink too much */
     .logo .text-group {
-        font-size: 22px;
+        font-size: 24px;
     }
 
     .logo-icon {
-        width: 32px;
-        height: 32px;
+        width: 36px;
+        height: 36px;
     }
 
     .logo-icon svg {
-        width: 32px;
-        height: 32px;
+        width: 36px;
+        height: 36px;
     }
 
     nav a {
@@ -1058,13 +1257,16 @@ thead th.col-hover {
         font-size: 20px;
     }
 
+    /* Keep buttons in a row, allow wrapping */
     .resource-links {
-        flex-direction: column;
-        align-items: stretch;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
     }
 
     .resource-link {
-        justify-content: center;
+        padding: 10px 16px;
+        font-size: 13px;
     }
 
     /* Even smaller result blocks */
@@ -1107,7 +1309,9 @@ thead th.col-hover {
 
     /* Example showcase small screen */
     .example-showcase {
-        margin: 24px -16px;
+        width: calc(100vw - 16px);
+        max-width: calc(100vw - 16px);
+        margin: 24px 0;
     }
 
     .example-tab {
@@ -1117,6 +1321,7 @@ thead th.col-hover {
 
     .example-panels {
         padding: 16px 12px;
+        border-radius: 8px;
     }
 
     .example-content {
