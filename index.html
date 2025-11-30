@@ -68,22 +68,9 @@
         <div id="example-showcase" class="example-showcase">
             <!-- Populated by examples.js -->
         </div>
-        <h2>Why CocoaBench?</h2>
-        <p>
-            Current evaluations often saturate quickly. CocoaBench introduces dynamic environment updates, requiring agents to not only generate code but also perceive changes in the state.
-        </p>
 
-        <h2>Evaluation Methodology (Placeholder)</h2>
-        <p>
-            Our scoring mechanism combines multiple metrics to provide a holistic view of agent performance. The final score is computed as:
-        </p>
-        <p class="math-block">
-            $$S = \frac{1}{N} \sum_{i=1}^{N} \left( \alpha \cdot \mathbb{1}[\text{pass}_i] + \beta \cdot \frac{T_{\text{ref}}}{T_i} + \gamma \cdot \text{efficiency}_i \right)$$
-        </p>
-        <p>
-            Where $\alpha$, $\beta$, and $\gamma$ are weighting factors, $\mathbb{1}[\text{pass}_i]$ is the pass indicator for task $i$, and $T_i$ represents the time taken.
-        </p>
-
+        <h2>Evaluation</h2>
+        We evaluate OpenAI Agent, Gemini, Claude, ... on the CocoaBench (v0.1).
         <h3>Performance Summary</h3>
         <table class="content-table">
             <thead>
@@ -96,62 +83,26 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Claude 3.5 Sonnet</td>
-                    <td>72%</td>
-                    <td>4.2</td>
-                    <td>0.89</td>
+                    <td>ChatGPT Agent</td>
+                    <td>...%</td>
+                    <td>...</td>
+                    <td>...</td>
                 </tr>
                 <tr>
-                    <td>GPT-4o</td>
-                    <td>68%</td>
-                    <td>5.1</td>
-                    <td>0.82</td>
+                    <td>Gemini 3.0 Pro</td>
+                    <td>...%</td>
+                    <td>...</td>
+                    <td>...</td>
                 </tr>
                 <tr>
-                    <td>Gemini 1.5 Pro</td>
-                    <td>64%</td>
-                    <td>4.8</td>
-                    <td>0.85</td>
+                    <td>Claude 4.5 Opus</td>
+                    <td>...%</td>
+                    <td>...</td>
+                    <td>...</td>
                 </tr>
             </tbody>
         </table>
 
-        <h3>Example Agent Loop</h3>
-        <p>
-            A typical agent interaction follows this pattern:
-        </p>
-        <div class="code-block-wrapper">
-            <div class="code-block-header">
-                <span class="code-block-lang">Python</span>
-                <button class="code-copy-btn" onclick="copyCode(this)">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                    Copy
-                </button>
-            </div>
-            <pre class="code-block"><code class="language-python">def agent_loop(task, environment):
-    state = environment.reset()
-    history = []
-    
-    while not state.is_terminal:
-        # Observe current state
-        observation = environment.observe()
-        
-        # Generate action via LLM
-        action = llm.generate(
-            task=task,
-            observation=observation,
-            history=history
-        )
-        
-        # Execute and update
-        state = environment.step(action)
-        history.append((observation, action))
-    
-    return evaluate(state, task)</code></pre>
-        </div>
 
         <h2>Citation</h2>
         <div class="citation-block">
