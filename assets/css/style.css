@@ -30,6 +30,10 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+li {
+    margin-bottom: 12px;
+}
+
 header {
     padding: 40px 60px;
     display: flex;
@@ -901,6 +905,7 @@ h3 {
     overflow: hidden;
     background: #f8f8f8;
     border: 1px solid #e5e5e5;
+    margin: 1rem 0;
 }
 
 .example-embed iframe {

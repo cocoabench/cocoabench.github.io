@@ -104,7 +104,7 @@ function renderExamples(container, examples) {
             <details class="example-reasoning">
                 <summary>
                     <span class="reasoning-toggle-icon"></span>
-                    Show reasoning process
+                    Show explanation
                 </summary>
                 <div class="reasoning-content">
                     ${parseMarkdown(ex.reasoning)}
@@ -135,7 +135,7 @@ function renderContent(example) {
         case 'text':
             return `
                 <div class="example-content example-content-text">
-                    <p class="example-question">${escapeHtml(content.question)}</p>
+                    <p class="example-question">${sanitizeHtml(content.question)}</p>
                 </div>
             `;
         
@@ -152,24 +152,31 @@ function renderContent(example) {
                     <div class="example-images ${content.images.length > 1 ? 'multiple' : ''}">
                         ${imagesHtml}
                     </div>
-                    ${content.question ? `<p class="example-question">${escapeHtml(content.question)}</p>` : ''}
+                    ${content.question ? `<p class="example-question">${sanitizeHtml(content.question)}</p>` : ''}
                 </div>
             `;
         
         case 'embed':
             // Direct load iframe - responsive width, fixed height
+            // Support embedPosition: 'top' to show iframe before question
+            const embedHtml = `
+                <div class="example-embed">
+                    <iframe 
+                        src="${content.url}" 
+                        style="height: ${content.height || 400}px;"
+                        frameborder="0"
+                        loading="lazy"
+                        allowfullscreen
+                    ></iframe>
+                </div>
+            `;
+            const questionHtml = content.question ? `<p class="example-question">${sanitizeHtml(content.question)}</p>` : '';
+            
+            const showEmbedFirst = content.embedPosition === 'top';
+            
             return `
                 <div class="example-content example-content-embed">
-                    ${content.question ? `<p class="example-question">${escapeHtml(content.question)}</p>` : ''}
-                    <div class="example-embed">
-                        <iframe 
-                            src="${content.url}" 
-                            style="height: ${content.height || 400}px;"
-                            frameborder="0"
-                            loading="lazy"
-                            allowfullscreen
-                        ></iframe>
-                    </div>
+                    ${showEmbedFirst ? embedHtml + questionHtml : questionHtml + embedHtml}
                 </div>
             `;
         
@@ -214,5 +221,32 @@ function escapeHtml(text) {
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
+}
+
+/**
+ * Sanitize HTML but allow safe tags (a, em, strong, br)
+ */
+function sanitizeHtml(text) {
+    if (!text) return '';
+    
+    // First escape everything
+    let sanitized = escapeHtml(text);
+    
+    // Then unescape safe tags
+    sanitized = sanitized.replace(/&lt;a\s+href=&quot;([^&]+)&quot;(\s+target=&quot;[^&]+&quot;)?(\s+rel=&quot;[^&]+&quot;)?&gt;/g, 
+        '<a href="$1"$2$3>');
+    sanitized = sanitized.replace(/&lt;\/a&gt;/g, '</a>');
+    sanitized = sanitized.replace(/&lt;em&gt;/g, '<em>');
+    sanitized = sanitized.replace(/&lt;\/em&gt;/g, '</em>');
+    sanitized = sanitized.replace(/&lt;strong&gt;/g, '<strong>');
+    sanitized = sanitized.replace(/&lt;\/strong&gt;/g, '</strong>');
+    sanitized = sanitized.replace(/&lt;br&gt;/g, '<br>');
+    
+    // Convert double newlines to paragraph breaks (br with margin)
+    sanitized = sanitized.replace(/\n\n+/g, '<br style="display: block; margin: 0.8em 0; content: \' \';">');
+    // Convert single newlines to simple br
+    sanitized = sanitized.replace(/\n/g, '<br>');
+    
+    return sanitized;
 }
 
