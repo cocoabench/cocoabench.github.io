@@ -101,7 +101,7 @@ function renderExamples(container, examples) {
                 <span class="answer-label">Answer:</span>
                 <span class="answer-value">${escapeHtml(ex.answer)}</span>
             </div>
-            <details class="example-reasoning">
+            <!--<details class="example-reasoning">
                 <summary>
                     <span class="reasoning-toggle-icon"></span>
                     Show explanation
@@ -109,7 +109,7 @@ function renderExamples(container, examples) {
                 <div class="reasoning-content">
                     ${parseMarkdown(ex.reasoning)}
                 </div>
-            </details>
+            </details>-->
         </div>
     `).join('');
 

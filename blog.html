@@ -48,7 +48,7 @@
 
         <h3>The hidden cost of static, single-domain design</h3>
         <p>
-            The issue is not that static systems are "cheating", nor that their results are useless. The issue is that <strong>a benchmark solved by a static, domain-specific workflow provides only limited evidence about the capabilities of general agents</strong>. When a benchmark is tightly coupled to a particular environment, it becomes natural, and often optimal, to engineer a bespoke workflow for that domain.
+            The issue is not that static systems are "cheating", nor that their results are useless. The issue is that <strong>a benchmark solved by a static, domain-specific workflow provides only limited evidence about the capabilities of general agents</strong>. When a benchmark is tightly coupled to a particular environment, it becomes natural, and often optimal, to engineer a workflow for that domain.
         </p>
         <p>
             This is good engineering, but it primarily rewards overfitting to one environment, rather than developing agents that can easily adapt to new tasks. As a result, a system that performs well under a carefully crafted pipeline may degrade sharply under even modest distribution shifts: a different build system, a different code host, or a task that suddenly requires reading PDFs and spreadsheets in addition to text. In effect, we risk building "this-repository agents" and "that-website agents" rather than agents that generalize across domains.
@@ -124,7 +124,7 @@
             Ideally the model should posses the ability to perceive with multimodality. Currently most mainstream models are vision and text, so we design our tasks to cover both text and image inputs.
         </p>
         <p>
-            It is important to note that <strong>there are often multiple valid perceptual pathways</strong> for completing a task. An effective agent should decide <em>which source</em> of information to read from, <em>how to preprocess or transform it</em>, and even <em>which modality</em> to rely on (e.g., whether to parse raw numbers or inspect a visualization). These choices reflect a form of metacognitive control, where the agent reasons about <em>how it should perceive</em> before reasoning about <em>what to do</em>.
+            It is important to note that <strong>there are often multiple valid perceptual pathways</strong> for completing a task. An effective agent should decide <em>which source</em> of information to read from, <em>how to preprocess or transform it</em>, and even <em>which modality</em> to rely on (e.g., plotting a figure and inspecting it would be more effective than processing raw numbers in the <a href="index.html#examples">"Linear regimes"</a> task). These choices reflect a form of metacognitive control, where the agent reasons about <em>how it should perceive</em> before reasoning about <em>what to do</em>.
         </p>
 
         <h3>Memory</h3>

@@ -5,11 +5,11 @@
       "title": "8-puzzle game",
       "type": "embed",
       "content": {
-        "url": "https://8puzzle-game.vercel.app/",
+        "url": "https://8puzzle-game-example.vercel.app/",
         "question": "You will be playing the 8-puzzle game. The puzzle's goal state is hidden; you must determine the correct target configuration by interacting with the interface. After identifying this target state, solve the puzzle from its initial state optimally—that is, using the minimum possible number of moves.\n\nA code can be checked at any time, and it changes as you make moves. Only the code shown at the moment you reach the correct target configuration with an optimal solution is valid.\n\nYour final answer must be that exact code.",
-        "height": 800
+        "height": 700
       },
-      "answer": "6CNTDL",
+      "answer": "EFPTGK",
       "reasoning": "**Step 1: Navigate to the chips section**\n\nClicked on Departments → Snacks & Chips. Found a list sorted by rating:\n\n| Product | Price |\n|---------|-------|\n| Pink Lady Apple Chips | $6.99 |\n| Crunchy Flamin' Hot Snacks | $4.98 |\n| Ridged Cheddar and Sour Cream Chips | $4.79 |\n| Nacho Cheese Tortilla Chips | $3.98 |\n| Classic Potato Chips | $3.48 |\n| Sour Cream & Onion Potato Chips | $3.48 |\n| TERRA Mediterranean Herbs | $5.29 |\n| Stackable Sour Cream & Onion Crisps | $2.48 |\n| Ketchup Flavored Lattice Chips | $5.49 |\n| Vegetable Root Chips | $4.99 |\n\n**Step 2: Identify Trader Joe's products**\n\nBy examining the product images, three items are Trader Joe's branded:\n- Pink Lady Apple Chips ($6.99)\n- Ketchup Flavored Lattice Chips ($5.49)\n- Vegetable Root Chips ($4.99)\n\n**Step 3: Add to cart and checkout**\n\nAfter adding these items to cart, the Order Summary shows:\n\n```\nSubtotal:                 $17.47\nDiscount (13% off):       -$2.27\nShipping (Flat):          +$2.00\nTax (7.75% on Overall):   +$1.33\n─────────────────────────────────\nTotal:                    $18.53\n```"
     },   
     {
