@@ -27,9 +27,17 @@
         "Llama-3.3-70B": {
           "status": "fail",
           "solution": "**Initial Exploration**\n\nOpened the puzzle interface. Saw a 3x3 grid with numbered tiles.\n\n**Problem Encountered**\n\nI had difficulty understanding how to discover the goal state. Tried various configurations but couldn't determine the correct target.\n\n**Attempts Made**\n\n1. Tried standard 1-8 configuration - didn't work\n2. Tried reverse order - didn't work\n3. Ran out of attempts\n\n**Conclusion:** Failed to identify the hidden goal state mechanism."
+        },
+        "DeepSeek-V3": {
+          "status": "pass",
+          "solution": "**Strategy Overview**\n\n1. Systematically probed the hidden goal by checking different canonical states.\n2. Confirmed the target is the standard ordered 8-puzzle layout.\n3. Ran an internal A* search with Manhattan distance heuristic to find the unique 12‑move optimal path.\n\n**Execution**\n\nCarefully replayed the 12‑step sequence in the UI, verifying with the check button only at the end.\n\n**Final code:** EFPTGK."
+        },
+        "Qwen-2.5-72B": {
+          "status": "fail",
+          "solution": "**Exploration and Failure Mode**\n\nCorrectly inferred the hidden goal configuration but executed a 14‑move solution instead of the optimal 12 moves.\nThe code returned by the checker corresponded to this sub‑optimal path and was therefore rejected.\n\n**Reason for failure:** did not enforce optimality when planning the trajectory."
         }
       }
-    },   
+    },
     {
       "id": 2,
       "title": "Linear regimes",
@@ -55,6 +63,14 @@
         "Llama-3.3-70B": {
           "status": "pass",
           "solution": "**Methodology**\n\n1. Downloaded and loaded data into numpy array\n2. Applied PELT algorithm for changepoint detection\n3. Validated with cross-validation\n\n**Changepoint Detection**\n\n```python\nfrom ruptures import Pelt\ndetector = Pelt(model=\"rbf\", min_size=30)\nbreakpoints = detector.fit_predict(data, pen=5)\n```\n\n**Results**\n\nDetected 2 breakpoints at indices 105 and 502, corresponding to:\n- 2022-03-16 (within tolerance)\n- 2023-07-21 (within tolerance)\n\n**Final:**\n```json\n{\"regime_count\": 3, \"breakpoints\": [\"2022-03-16\", \"2023-07-21\"]}\n```"
+        },
+        "DeepSeek-V3": {
+          "status": "pass",
+          "solution": "**Pipeline**\n\n1. Loaded the CSV into Python and standardized the time index.\n2. Used `ruptures` with an `l2` cost model and BIC‑based model selection.\n3. The best configuration had 3 regimes with breakpoints around March 2022 and late July 2023.\n\n**Reported answer**\n\nReturned a JSON object with 3 regimes and breakpoints within the ±7‑day tolerance window of the ground truth."
+        },
+        "Qwen-2.5-72B": {
+          "status": "fail",
+          "solution": "**Mistake**\n\nDetected three visual slope changes by eye but then fit a two‑segment linear model, effectively merging the last two regimes.\nAs a result, I answered with `regime_count = 2` and a single breakpoint, which was scored as incorrect."
         }
       }
     },
@@ -83,6 +99,14 @@
         "Llama-3.3-70B": {
           "status": "fail",
           "solution": "**Attempt**\n\nTried to access the W&B dashboard but encountered issues with the interface.\n\n**Problem**\n\nCouldn't properly filter and compare runs. The dashboard was complex and I wasn't familiar with the exact metrics to look for.\n\n**Guess: 2**\n\nBased on partial data I could extract, but this was not confident.\n\n*(Incorrect - actual answer is 3)*"
+        },
+        "DeepSeek-V3": {
+          "status": "pass",
+          "solution": "**Filtering and comparison**\n\nEfficiently filtered the W&B runs to only 32B models and grouped them by `clip_high` configuration.\nThen computed `max(val_metric)` for each benchmark across runs and compared DAPO (0.28) against baselines.\nFound clear >0.02 gains on gsm8k, math, and mmlu‑pro only.\n\n**Final answer:** 3."
+        },
+        "Qwen-2.5-72B": {
+          "status": "fail",
+          "solution": "**Failure pattern**\n\nCorrectly identified 32B runs but mixed 13B runs into the baseline set when aggregating metrics.\nThis inflated the baseline variance and led me to incorrectly count 4 benchmarks as having clear gains."
         }
       }
     },
@@ -114,6 +138,14 @@
         "Llama-3.3-70B": {
           "status": "fail",
           "solution": "**Exploration**\n\nAccessed the shopping portal. Found the chips section.\n\n**Challenges**\n\n1. Difficulty parsing nutrition information\n2. Complex formula calculation for Charlie\n3. Rating system wasn't immediately visible\n\n**Attempted Answer**\n\nAdded items to cart but wasn't confident about the selections.\n\n**Total: $42.15** (incorrect - wrong items selected)"
+        },
+        "DeepSeek-V3": {
+          "status": "pass",
+          "solution": "**Structured browsing**\n\n1. Isolated Trader Joe's and Terra chips using the site's filters.\n2. Read nutrition labels into a small scratchpad table and evaluated each constraint (sugar, sodium, custom score).\n3. Used the on‑site ratings to choose the top‑two items for the \"review truster\" criteria.\n\nAfter adding the required quantities and proceeding to checkout, the portal displayed **Total = $56.36**."
+        },
+        "Qwen-2.5-72B": {
+          "status": "fail",
+          "solution": "**Where things went wrong**\n\nCorrectly selected items for Alice and Bob, but mis‑implemented Charlie's custom score by forgetting the 1.48 multiplier on fiber.\nThis changed the ranking of candidates and produced the wrong set of items, leading to an incorrect total at checkout."
         }
       }
     }
