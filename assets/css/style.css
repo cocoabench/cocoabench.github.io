@@ -1807,14 +1807,60 @@ h3 {
 
 /* Grid wrapper */
 .gallery-grid-wrapper {
-    padding: 16px;
+    padding: 32px 20px 12px 20px;
     overflow-x: auto;
+}
+
+/* Legend under the gallery table */
+.gallery-legend {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 0 20px 12px 20px;
+    font-size: 13px;
+    color: #666;
+}
+
+.gallery-legend-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.gallery-legend-swatch {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+}
+
+.gallery-legend-swatch.pass {
+    background: #66BB6A;
+}
+
+.gallery-legend-swatch.fail {
+    background: #EF5350;
+}
+
+.gallery-legend-label {
+    font-size: 13px;
+    color: #555;
+    margin-right: 4px;
+}
+
+.gallery-legend-text {
+    font-size: 12px;
+    color: #777;
+    text-align: right;
 }
 
 .gallery-grid {
     width: 100%;
     min-width: 0; /* Override global table min-width */
     border-collapse: collapse;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .gallery-grid th,
@@ -1825,14 +1871,14 @@ h3 {
 }
 
 .gallery-grid th {
-    padding: 10px 0;
+    padding: 10px clamp(1px, 0.6vw, 6px);
 }
 
 .gallery-model-header {
     text-align: left !important;
     width: auto;
     padding-left: 12px !important;
-    padding-right: clamp(20px, 7vw, 72px) !important;
+    padding-right: clamp(16px, 5vw, 60px) !important;
     font-weight: 600;
     font-size: 13px;
     color: var(--color-text);
@@ -1846,7 +1892,7 @@ h3 {
     white-space: normal;
     line-height: 1.35;
     word-break: break-word;
-    width: clamp(56px, 9vw, 91px);
+    width: clamp(48px, 8vw, 60px);
 }
 
 .gallery-model-row {
@@ -1872,7 +1918,7 @@ h3 {
     text-align: left !important;
     width: auto;
     padding-left: clamp(8px, 1.5vw, 12px) !important;
-    padding-right: clamp(20px, 7vw, 72px) !important;
+    padding-right: clamp(16px, 5vw, 60px) !important;
 }
 
 .gallery-model-cell-inner {
@@ -1896,8 +1942,8 @@ h3 {
 }
 
 .gallery-cell {
-    width: clamp(56px, 9vw, 91px);
-    padding: clamp(10px, 1.8vw, 18px) 0 !important;
+    width: clamp(48px, 8vw, 60px);
+    padding: clamp(2px, 0.8vw, 8px) clamp(1px, 0.6vw, 6px) !important;
 }
 
 .gallery-cell:last-child,
@@ -1908,9 +1954,9 @@ h3 {
 /* Result blocks - smooth scaling with clamp() */
 .result-block-mini {
     display: inline-block;
-    width: clamp(36px, 5.5vw, 55px);
-    height: clamp(36px, 5.5vw, 55px);
-    border-radius: clamp(6px, 0.8vw, 8px);
+    width: clamp(24px, 3.8vw, 36px);
+    height: clamp(24px, 3.8vw, 36px);
+    border-radius: clamp(4px, 0.6vw, 6px);
     border: none;
     cursor: pointer;
     transition: transform 0.15s ease, box-shadow 0.15s ease, outline 0.15s ease;
@@ -1931,35 +1977,35 @@ h3 {
 }
 
 .result-block-mini.active {
-    transform: scale(1.05) translateY(-2px);
+    transform: scale(1.04) translateY(-1px);
     box-shadow: 
-        0 0 0 3px #fff,
-        0 0 0 5px rgba(0, 0, 0, 0.15),
-        0 8px 20px rgba(0, 0, 0, 0.15);
+        0 0 0 2px #fff,
+        0 0 0 4px rgba(0, 0, 0, 0.14),
+        0 6px 16px rgba(0, 0, 0, 0.14);
     animation: selected-pulse 2s ease-in-out infinite;
 }
 
 @keyframes selected-pulse {
     0%, 100% {
         box-shadow: 
-            0 0 0 3px #fff,
-            0 0 0 5px rgba(0, 0, 0, 0.15),
-            0 8px 20px rgba(0, 0, 0, 0.15);
+            0 0 0 2px #fff,
+            0 0 0 4px rgba(0, 0, 0, 0.14),
+            0 6px 16px rgba(0, 0, 0, 0.14);
     }
     50% {
         box-shadow: 
-            0 0 0 4px #fff,
-            0 0 0 7px rgba(0, 0, 0, 0.1),
-            0 10px 25px rgba(0, 0, 0, 0.12);
+            0 0 0 3px #fff,
+            0 0 0 5px rgba(0, 0, 0, 0.12),
+            0 8px 20px rgba(0, 0, 0, 0.12);
     }
 }
 
 @media (hover: hover) and (pointer: fine) {
     .result-block-mini:not(.na):hover {
-        transform: scale(1.08) translateY(-3px);
+        transform: scale(1.06) translateY(-2px);
         box-shadow: 
             0 0 0 2px rgba(255, 255, 255, 0.8),
-            0 6px 16px rgba(0, 0, 0, 0.18);
+            0 5px 14px rgba(0, 0, 0, 0.18);
     }
     
     .result-block-mini.active:hover {
@@ -2186,7 +2232,19 @@ h3 {
     }
     
     .gallery-grid-wrapper {
-        padding: 12px;
+        padding: 16px 14px 12px 14px;
+    }
+
+    .gallery-legend {
+        padding: 0 14px 10px 14px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+    
+    .gallery-legend-text {
+        text-align: left;
+        font-size: 11.5px;
     }
     
     .gallery-model-name {
@@ -2214,7 +2272,7 @@ h3 {
 
 @media (max-width: 480px) {
     .gallery-grid-wrapper {
-        padding: 8px;
+        padding: 12px 10px 10px 10px;
     }
     
     .gallery-model-name {
@@ -2232,7 +2290,7 @@ h3 {
     
     .gallery-cell:last-child,
     .gallery-example-header:last-child {
-        padding-right: 8px !important;
+    padding-right: clamp(12px, 4vw, 32px) !important;
     }
     
     /* Simplify solution card on narrow screens */

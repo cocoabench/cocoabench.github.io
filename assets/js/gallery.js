@@ -49,7 +49,14 @@ function getModelLogo(modelName) {
  * Get ordered list of models (consistent ordering)
  */
 function getModelOrder() {
-    return ['Claude-3.5-Sonnet', 'GPT-4o', 'Gemini-2.0-Pro', 'Llama-3.3-70B'];
+    return [
+        'Claude-3.5-Sonnet',
+        'GPT-4o',
+        'Gemini-2.0-Pro',
+        'Llama-3.3-70B',
+        'DeepSeek-V3',
+        'Qwen-2.5-72B'
+    ];
 }
 
 /**
@@ -172,6 +179,17 @@ function renderGallery(container, examples) {
                         ${modelRows}
                     </tbody>
                 </table>
+            </div>
+            <div class="gallery-legend">
+                <div class="gallery-legend-left">
+                    <span class="gallery-legend-swatch pass"></span>
+                    <span class="gallery-legend-label">Pass</span>
+                    <span class="gallery-legend-swatch fail"></span>
+                    <span class="gallery-legend-label">Fail</span>
+                </div>
+                <div class="gallery-legend-text">
+                    Click any colored square to inspect that model&rsquo;s solution below.
+                </div>
             </div>
             <div class="gallery-solution-panel" id="gallery-solution-panel">
                 <!-- Will be populated with first selection -->
