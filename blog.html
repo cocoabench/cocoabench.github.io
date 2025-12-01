@@ -21,15 +21,6 @@
         <p class="subtitle">By The CocoaBench Team</p>
         <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
 
-        <div style="background-color: #f8f9fa; padding: 20px; border-left: 4px solid #4a90e2; margin-bottom: 30px;">
-            <h3 style="margin-top: 0;">💡 Key messages:</h3>
-            <ul>
-                <li><strong>Existing agent benchmarks are not well-suited for evaluating <em>general</em> agents:</strong> they are often single-domain or tightly coupled to particular environments and setups. We instead focus on agents that operate a set of <em>general tools</em> (browser, code execution, file systems, etc.) while being able to solve highly complex tasks.</li>
-                <li><strong>We design the benchmark around cognitive abilities</strong> rather than specific tools. The concrete interfaces and protocols through which LLMs interact with the world will change, but the underlying abilities required, <em>perception, reasoning, and memory</em>, remain useful for general-purpose agent.</li>
-                <li><strong>The benchmark is easy to use:</strong> tasks are human-understandable, automatically evaluated by scripts. We also developed a framework makes it straightforward to evaluate any models within a lightweight sandbox.</li>
-            </ul>
-        </div>
-
         <h2>What's missing for benchmarking general agents</h2>
         <p>
             In the last two years, benchmarks for LLM-based agents have proliferated. We now have standardized suites for repository-level debugging, web browsing, deep research. At first sight, this looks like straightforward progress: tasks become more realistic, reported scores increase, and new agent frameworks are released at a rapid pace.
@@ -54,7 +45,7 @@
             This is good engineering, but it primarily rewards overfitting to one environment, rather than developing agents that can easily adapt to new tasks. As a result, a system that performs well under a carefully crafted pipeline may degrade sharply under even modest distribution shifts: a different build system, a different code host, or a task that suddenly requires reading PDFs and spreadsheets in addition to text. In effect, we risk building "this-repository agents" and "that-website agents" rather than agents that generalize across domains.
         </p>
 
-        <h3>Agents are becoming more general; benchmarks remain narrow</h2>
+        <h3>Agents are becoming more general; benchmarks remain narrow</h3>
         <p>
             In parallel, we are beginning to see early research prototypes that move toward more general agent frameworks. Recent systems, such as <a href="https://openai.com/index/introducing-chatgpt-canvas/">ChatGPT agent</a> and <a href="https://ui-tars.github.io/">UI-TARS-2</a>, aim to:
         </p>
@@ -222,5 +213,6 @@
         <p class="footer-credits">Design inspired by <a href="https://thinkingmachines.ai/" target="_blank" rel="noopener">Thinking Machines</a> and <a href="https://openai.com/" target="_blank" rel="noopener">OpenAI</a></p>
     </footer>
     <script src="./assets/js/logo.js"></script>
+    <script src="./assets/js/toc.js"></script>
 </body>
 </html>
