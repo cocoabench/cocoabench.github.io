@@ -16,23 +16,205 @@
         </nav>
     </header>
     <div class="container">
-        <p style="font-size: 14px; color: #666; margin-bottom: 10px;">December 1, 2025</p>
-        <h1>Towards General Agent with Compositional Cognitive Abilities</h1>
+        <p style="font-size: 14px; color: #666; margin-bottom: 10px;">November 30, 2025</p>
+        <h1>CocoaBench: Towards General Agent with Flexible Cognition</h1>
         <p class="subtitle">By The CocoaBench Team</p>
         <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
+
+        <div style="background-color: #f8f9fa; padding: 20px; border-left: 4px solid #4a90e2; margin-bottom: 30px;">
+            <h3 style="margin-top: 0;">💡 Key messages:</h3>
+            <ul>
+                <li><strong>Existing agent benchmarks are not well-suited for evaluating <em>general</em> agents:</strong> they are often single-domain or tightly coupled to particular environments and setups. We instead focus on agents that operate a set of <em>general tools</em> (browser, code execution, file systems, etc.) while being able to solve highly complex tasks.</li>
+                <li><strong>We design the benchmark around cognitive abilities</strong> rather than specific tools. The concrete interfaces and protocols through which LLMs interact with the world will change, but the underlying abilities required, <em>perception, reasoning, and memory</em>, remain useful for general-purpose agent.</li>
+                <li><strong>The benchmark is easy to use:</strong> tasks are human-understandable, automatically evaluated by scripts. We also developed a framework makes it straightforward to evaluate any models within a lightweight sandbox.</li>
+            </ul>
+        </div>
+
+        <h2>What's missing for benchmarking general agents</h2>
         <p>
-            To be updated. Will migrate the <a href="https://lofty-sousaphone-afa.notion.site/CocoaBench-Towards-General-Agent-with-Flexible-Cognition-2aaed51adad28060b04ce3b7b4e88835">draft</a> to this page tomorrow.
+            In the last two years, benchmarks for LLM-based agents have proliferated. We now have standardized suites for repository-level debugging, web browsing, deep research. At first sight, this looks like straightforward progress: tasks become more realistic, reported scores increase, and new agent frameworks are released at a rapid pace.
+        </p>
+        <p>
+            However, a closer look at how these systems are built reveals a different pattern. For example, when we look at the leaderboard of <a href="https://www.swebench.com/">SWEBench</a>, strong performance is not necessarily produced by agents that autonomously decide <em>how</em> to solve a task, but by <strong>agentless frameworks</strong>, predefined workflows or domain-specific pipelines that merely call an LLM at designated steps (Figure 1, left). In these systems, the framework designer specifies the overall plan, and the model is only responsible for filling in local decisions within each stage.
+        </p>
+        <p>
+            Even frameworks that appear more flexible often impose a strong prior on the agent's behavior. A common pattern is to define a <strong>fixed interaction loop</strong> with the environment: at every step, the latest observation is inserted into a prompt template, the model is asked to produce a short reasoning chain, and then an action is decoded and executed (Figure 1, right). This loop is applied uniformly throughout a trajectory, regardless of the task phase, the agent's uncertainty, or the difficulty of the current subproblem. The agent may choose <em>what</em> to click or edit, but it does not choose <em>how</em> to structure its own interaction with the environment.
         </p>
 
-        <h2>What's missing for benchmarking general agents?</h2>
-        ...
-        <blockquote>
-            "..."
-        </blockquote>
+        <figure class="figure-block" style="margin: 40px 0;">
+            <img src="./assets/figures/comparison_agentless.jpg" alt="Figure 1: Examples of agentless design patterns" style="width: 100%; max-width: 1200px; height: auto;">
+            <figcaption><strong>Figure 1:</strong> Examples of agentless design patterns in current LLM-based agent systems. The left panel shows a program-repair workflow (<a href="https://github.com/kimi-ai/kimi-dev">Kimi-Dev</a>) in which the framework predefines stages such as test generation and code editing; the LLM is invoked to complete each stage but does not control the overall plan. The right panel shows a web agent (<a href="https://github.com/ServiceNow/AgentLab">AgentLab</a>) that operates in a fixed interaction loop: at every step, the current browser state is injected into a prompt, the model produces a brief reasoning trace and an action, and this pattern is repeated uniformly throughout the episode.</figcaption>
+        </figure>
 
-        <br><br>
+        <h3>The hidden cost of static, single-domain design</h3>
+        <p>
+            The issue is not that static systems are "cheating", nor that their results are useless. The issue is that <strong>a benchmark solved by a static, domain-specific workflow provides only limited evidence about the capabilities of general agents</strong>. When a benchmark is tightly coupled to a particular environment, it becomes natural, and often optimal, to engineer a bespoke workflow for that domain.
+        </p>
+        <p>
+            This is good engineering, but it primarily rewards overfitting to one environment, rather than developing agents that can easily adapt to new tasks. As a result, a system that performs well under a carefully crafted pipeline may degrade sharply under even modest distribution shifts: a different build system, a different code host, or a task that suddenly requires reading PDFs and spreadsheets in addition to text. In effect, we risk building "this-repository agents" and "that-website agents" rather than agents that generalize across domains.
+        </p>
+
+        <h3>Agents are becoming more general; benchmarks remain narrow</h2>
+        <p>
+            In parallel, we are beginning to see early research prototypes that move toward more general agent frameworks. Recent systems, such as <a href="https://openai.com/index/introducing-chatgpt-canvas/">ChatGPT agent</a> and <a href="https://ui-tars.github.io/">UI-TARS-2</a>, aim to:
+        </p>
+        <ul>
+            <li>operate over several general tools (browsers, file systems, terminals, code interpreters),</li>
+            <li>act within rich user interfaces rather than text-only environments, and</li>
+            <li>tackle open-ended, long-horizon tasks that do not fit a single-domain template.</li>
+        </ul>
+
+        <figure class="figure-block" style="margin: 40px 0;">
+            <img src="./assets/figures/chatgpt_agent.jpg" alt="Figure 2: ChatGPT Agent examples" style="width: 100%; max-width: 1200px; height: auto;">
+            <figcaption><strong>Figure 2:</strong> Examples of ChatGPT Agent in action. (Demos from <a href="https://openai.com/index/introducing-chatgpt-agent/">OpenAI</a>)</figcaption>
+        </figure>
+
+        <p>
+            These efforts target the objective we ultimately care about: agents that can adapt across domains, compose skills, and regulate their own behavior. Yet their evaluation remains largely anchored to narrow, domain-specific benchmarks. We currently lack benchmarks that are designed from the ground up to measure <strong>the progress of general agent.</strong>
+        </p>
+
+        <h2>From agents for domains to agents with flexible cognitive abilities</h2>
+        <p>
+            Recent work on agent benchmarks has started to move beyond single-domain tasks by wiring LLMs to large tool suites, e.g., <a href="https://github.com/stanford-oval/ToolAlphaEval">TOOLATHLON</a>, <a href="https://mcpmark.com/">MCPMark</a> curate extensive MCP-compatible tool ecosystems for models to operate on.
+        </p>
+        <p>
+            In this work, we take a different perspective. The <em>specific tools</em> an LLM interacts with, and communication protocols like MCP, are likely to evolve rapidly. In contrast, <strong>the cognitive abilities required to solve problems are far more stable</strong>. Humans succeed in unfamiliar environments not because they have memorized every interface, but because they apply general principles of perception, reasoning, and memory to understand and navigate new tasks.
+        </p>
+        <p>
+            Our design philosophy therefore shifts the target from "agents that support as many tools as possible" to <strong>agents with flexible cognitive abilities</strong> that can, in principle, adapt to new tools and environments, and solve very complex tasks. We highlight tasks around three core capacities an agent should bring to any environment:
+        </p>
+        <ul>
+            <li>how it <strong>perceives</strong> the world</li>
+            <li>how it <strong>reasons</strong> and makes decisions</li>
+            <li>how it operates <strong>memory</strong></li>
+        </ul>
+        <p>
+            and, more importantly, how the agent can <strong>compose these abilities</strong> to solve more complex problems, including the <strong>metacognitive control</strong> needed to decide <em>when and how</em> to deploy perception, reasoning, and memory to for problem solving.
+        </p>
+
+        <figure class="figure-block" style="margin: 40px 0;">
+            <img src="./assets/figures/architecture.jpg" alt="Cognitive Architecture Diagram" style="width: 75%; height: auto;">
+            <figcaption><strong>Figure 3:</strong> The three core cognitive abilities evaluated in CocoaBench: Perception, Reasoning, and Memory, and how they interact with the world and within the agent.</figcaption>
+        </figure>
+
+        <h3>Perception</h3>
+        <p>
+            We use <em>perception</em> to mean how the agent maps the external environment into its internal state, what is ultimately committed to the LLM's hidden state, either as text in the context window or as visual embeddings.
+        </p>
+
+        <h4>Source</h4>
+        <p>
+            The agent may need to perceive information from diverse sources: websites, data files, images, code execution outputs, etc. For each task, we label the perception source.
+        </p>
+
+        <h4>Preprocessing</h4>
+        <p>
+            Perception is not simply "dump all observations into the prompt." Before committing information into the LLM, the agent may preprocess its observations. For example:
+        </p>
+        <ul>
+            <li>filtering output with <code>grep</code> after a terminal command</li>
+            <li>zooming into an image region to inspect details</li>
+        </ul>
+        <p>
+            These operations correspond to <strong>cognitive offloading</strong>: delegating parts of the perceptual pipeline to external tools. We catalog common preprocessing strategies and annotate each task with the relevant ones.
+        </p>
+
+        <h4>Modality</h4>
+        <p>
+            Ideally the model should posses the ability to perceive with multimodality. Currently most mainstream models are vision and text, so we design our tasks to cover both text and image inputs.
+        </p>
+        <p>
+            It is important to note that <strong>there are often multiple valid perceptual pathways</strong> for completing a task. An effective agent should decide <em>which source</em> of information to read from, <em>how to preprocess or transform it</em>, and even <em>which modality</em> to rely on (e.g., whether to parse raw numbers or inspect a visualization). These choices reflect a form of metacognitive control, where the agent reasons about <em>how it should perceive</em> before reasoning about <em>what to do</em>.
+        </p>
+
+        <h3>Memory</h3>
+        <p>
+            Following the <a href="https://arxiv.org/abs/2309.02427">CoALA framework</a> for language agents, we view memory as a <strong>modular hierarchy</strong>: a short-term <strong>working memory</strong>, and several long-term memories—episodic (experience), semantic (knowledge), and procedural (skills and routines).
+        </p>
+        <p>
+            In this work, we focus on <strong>working memory</strong> and <strong>procedural memory</strong>, which are most directly exposed in our tasks, and effective managing them remains open research questions:
+        </p>
+
+        <h4>Working memory</h4>
+        <p>
+            Working memory is whatever the agent actively maintains in its current internal state for the next decision. Because context windows are finite, the agent must decide:
+        </p>
+        <ul>
+            <li>what to keep verbatim (e.g., the most recent stack trace),</li>
+            <li>what to compress or summarize (e.g., a long config file or multi-page paper), and</li>
+            <li>what to forget entirely, or delegate to long-term memory.</li>
+        </ul>
+        <p>
+            Blindly appending everything, as many current frameworks do, quickly leads to noisy context and brittle behavior. A good framework makes these operations explicit (e.g., insert, summarize, forget) and lets the agent control them.
+        </p>
+        <p>
+            In our benchmark, many tasks require <strong>long interaction trajectories</strong>, so naive "log everything" strategies fail: the agent must learn to actively curate its working memory to stay focused on what matters for the next few actions.
+        </p>
+
+        <h4>Procedural memory</h4>
+        <p>
+            Procedural memory stores knowledge of <em>how to do things</em>, allows the agent to perform tasks without repetitively exploring in the environment. Examples include crafting items in Minecraft (<a href="https://voyager.minedojo.org/">Voyager</a>), commonly reused routines in web browsing (<a href="https://github.com/zorazrw/agent-workflow-memory">Agent Workflow Memory</a>), or specific expertise that can be used in general AI assistant (<a href="https://www.anthropic.com/news/agent-skills">Claude Agent Skills</a>).
+        </p>
+        <p>
+            In most current systems, these routines live as Python code in the framework, not as writable agent memory. We, instead, are interested in agents that can <strong>acquire, store, and invoke procedures themselves</strong>. For example, once the agent discovers an effective way to "get the highest validation accuracy of a W&B run," it should be able to reuse that same routine to inspect every run, rather than re-exploring the space of actions from scratch each time.
+        </p>
+        <p>
+            In our benchmark, we explicitly <strong>label the procedural skills</strong> that are helpful for each task, so we can analyze whether agents are genuinely learning and reusing these routines.
+        </p>
+
+        <h3>Reasoning</h3>
+
+        <h4>Planning</h4>
+        <p>
+            These tasks cannot be solved by a few actions: the agent must decide on a multi-step plan based on the tools it can use and its own capabilities. For all the tasks, we provide a <strong>reference plan</strong> that describes one reasonable solution path.
+        </p>
+
+        <h4>Reasoning directionality</h4>
+        <p>
+            For each task, we mark the <strong>dominant direction of reasoning</strong>: deductive, inductive, or abductive. Existing benchmarks typically concentrate on one direction (e.g., abductive reasoning in <a href="https://openai.com/index/browsecomp/">BrowseComp</a>, where the agent must infer a hidden target from partial clues). In contrast, CocoaBench deliberately spans all three, resulting in a more diverse set of reasoning questions.
+        </p>
+        <ul>
+            <li><strong>Deductive reasoning:</strong> from general rules to specific conclusions. For example, the agent is given a set of specific rules and raw logs, and expected to answer a question.</li>
+            <li><strong>Inductive reasoning:</strong> from multiple examples to a general pattern. For example, the agent is asked to fit a function from raw plots.</li>
+            <li><strong>Abductive reasoning:</strong> from observed outcomes to the most plausible explanation or hypothesis. For example, the agent is required to discover correct configurations from observation.</li>
+        </ul>
+        <p>
+            Typically, tasks are mixed with all different reasoning directions. We do not treat these categories as rigid boxes. Instead, they provide a <strong>lens for analysis</strong>: for each task, we mark which directionality is most important, allowing us to ask, for example, whether agents struggle more with abductive tasks (explaining failures) than with purely deductive ones (checking constraints).
+        </p>
+
+        <h4>Reasoning skills</h4>
+        <p>
+            Finally, we label whether a task specifically stresses <strong>symbolic</strong> or <strong>visual</strong> reasoning:
+        </p>
+        <ul>
+            <li><strong>Symbolic reasoning:</strong> tasks that are better handled via code execution or precise manipulation of discrete structures (tables, logs, JSON, formulas, program traces, etc.).</li>
+            <li><strong>Visual reasoning:</strong> tasks that rely on spatial relations, layout, or GUI understanding, such as interpreting plots, comparing figures, or navigating complex interfaces.</li>
+        </ul>
+        <p>
+            We use simple 0/1 labels for symbolic and visual reasoning on each task, and they can overlap when both skills are required.
+        </p>
+
+        <h3>Evaluation and Next Steps</h3>
+        <p>
+            We are currently evaluating various state-of-the-art models and agent frameworks on CocoaBench. Results and detailed analysis will be available soon on our <a href="leaderboard.html">Leaderboard</a> page.
+        </p>
+        <p>
+            Our development framework and evaluation scripts are open-source and available on <a href="https://github.com/cocoa-bench/cocoa-bench">GitHub</a>, making it straightforward for researchers to evaluate their own agents within a lightweight sandbox environment.
+        </p>
+
+        <h3>Discussion and Future Work</h3>
+        <p>
+            Looking ahead, we see several exciting directions for future work:
+        </p>
+        <ul>
+            <li><strong>Multi-agent systems:</strong> Exploring specialized models for different cognitive functions (e.g., specialized model for GUI operation)</li>
+            <li><strong>Extended memory systems:</strong> Investigating episodic and semantic memory beyond working and procedural memory</li>
+            <li><strong>Meta-learning:</strong> Developing agents that can learn how to learn across tasks</li>
+        </ul>
+
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
         <p style="font-size: 14px; color: #999;">
-            Back to <a href="index.html">Introduction</a>
+            Back to <a href="index.html">Introduction</a> | View <a href="leaderboard.html">Leaderboard</a>
         </p>
     </div>
     <footer class="site-footer">
