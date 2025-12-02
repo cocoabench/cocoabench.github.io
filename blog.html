@@ -17,7 +17,7 @@
     </header>
     <div class="container">
         <p style="font-size: 14px; color: #666; margin-bottom: 10px;">December 2, 2025</p>
-        <h1>CocoaBench: Towards General Agent with Compositional Cognitive Abilities</h1>
+        <h1>Towards General Agent with Compositional Cognitive Abilities</h1>
         <p class="subtitle">By The CocoaBench Team</p>
         <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
 
@@ -32,7 +32,7 @@
         </figure>
         
         <p>
-            However, a closer look at how these systems are built reveals a different pattern. For example, when we look at the leaderboard of <a href="https://www.swebench.com/">SWEBench</a>, strong performance is not necessarily produced by agents that autonomously decide <em>how</em> to solve a task, but by <strong>agentless frameworks</strong>, predefined workflows or domain-specific pipelines that merely call an LLM at designated steps (Figure 1, left). In these systems, the framework designer specifies the overall plan, and the model is only responsible for filling in local decisions within each stage.
+            However, a closer look at how these systems are built reveals a different pattern. For example, when we look at the leaderboard of <a href="https://www.swebench.com/">SWE-Bench</a>, strong performance is not necessarily produced by agents that autonomously decide <em>how</em> to solve a task, but by <strong>agentless frameworks</strong>, predefined workflows or domain-specific pipelines that merely call an LLM at designated steps (Figure 1, left). In these systems, the framework designer specifies the overall plan, and the model is only responsible for filling in local decisions within each stage.
         </p>
         <p>
             Even frameworks that appear more flexible often impose a strong prior on the agent's behavior. A common pattern is to define a <strong>fixed interaction loop</strong> with the environment: at every step, the latest observation is inserted into a prompt template, the model is asked to produce a short reasoning chain, and then an action is decoded and executed (Figure 1, right). This loop is applied uniformly throughout a trajectory, regardless of the task phase, the agent's uncertainty, or the difficulty of the current subproblem. The agent may choose <em>what</em> to click or edit, but it does not choose <em>how</em> to structure its own interaction with the environment.
@@ -114,7 +114,7 @@
 
         <h4>Modality</h4>
         <p>
-            Ideally the model should possess the ability to perceive with multimodality. Currently most mainstream models are vision and text, so we design our tasks to cover both text and image inputs.
+            Ideally the model should possess the ability to perceive with multimodality. In CocoaBench, we design our tasks to cover both text and image inputs.
         </p>
         <p>
             It is important to note that <strong>there are often multiple valid perceptual pathways</strong> for completing a task. An effective agent should decide <em>which source</em> of information to read from, <em>how to preprocess or transform it</em>, and even <em>which modality</em> to rely on (e.g., plotting a figure and inspecting it would be more effective than processing raw numbers in the <a href="index.html#example-linear-regimes">"Linear regimes"</a> task). These choices reflect a form of metacognitive control, where the agent reasons about <em>how it should perceive</em> before reasoning about <em>what to do</em>.
