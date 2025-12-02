@@ -250,7 +250,8 @@ function setupGalleryInteraction(container) {
     let activeBlock = null;
     
     // Helper function to select a block
-    function selectBlock(block) {
+    // @param {boolean} openByDefault - Whether to open the solution panel (default: false)
+    function selectBlock(block, openByDefault = false) {
         const exampleId = parseInt(block.getAttribute('data-example-id'));
         const modelName = block.getAttribute('data-model');
         
@@ -270,8 +271,8 @@ function setupGalleryInteraction(container) {
         const solution = example.model_solutions?.[modelName];
         if (!solution) return;
         
-        // Render solution (collapsed by default)
-        renderSolution(panel, example, modelName, solution, false);
+        // Render solution
+        renderSolution(panel, example, modelName, solution, openByDefault);
     }
     
     blocks.forEach(block => {
@@ -294,9 +295,9 @@ function setupGalleryInteraction(container) {
         });
     });
     
-    // Auto-select first cell on load
+    // Auto-select first cell on load and open the solution panel
     if (blocks.length > 0) {
-        selectBlock(blocks[0]);
+        selectBlock(blocks[0], true);
     }
 }
 
