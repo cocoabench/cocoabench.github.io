@@ -194,6 +194,11 @@
             We use simple 0/1 labels for symbolic and visual reasoning on each task, and they can overlap when both skills are required.
         </p>
 
+        <h2>The cocoa-agent Framework</h2>
+        <p>
+            To enable rigorous evaluation and empower researchers to develop their own agents, we built the <strong><a href="https://github.com/cocoabench/cocoa-agent">cocoa-agent</a></strong> framework. It provides seamless integration with <a href="https://github.com/agent-infra/sandbox">AIO Sandbox</a>, an all-in-one environment open-sourced by ByteDance. It equips agents with a full suite of tools—browser automation, terminal access, file operations, and code interpreters—enabling them to operate like human developers in realistic settings. Our framework is model-agnostic, and we provide example scripts for running agents with both open-source LLMs such as Qwen3-VL and commercial models such as GPT-5.1. To support robust evaluation at scale, cocoa-agent implements both dynamic runtime tests for verifying computational correctness and lightweight static-matching checks for deterministic answers. We are currently producing comprehensive results on CocoaBench using this framework, which will be available soon on our leaderboard.
+        </p>
+
         <h3>Evaluation and Next Steps (Placeholder now!)</h3>
         <p>
             We are currently evaluating various state-of-the-art models and agent frameworks on CocoaBench. Results and detailed analysis will be available soon on our <a href="leaderboard.html">Leaderboard</a> page.
@@ -212,6 +217,8 @@
             <li><strong>Meta-learning:</strong> Developing agents that can learn how to learn across tasks</li>
         </ul>
 
+
+        
         <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
         <p style="font-size: 14px; color: #999;">
             Back to <a href="index.html">Introduction</a> | View <a href="leaderboard.html">Leaderboard</a>
