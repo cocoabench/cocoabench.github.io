@@ -14,27 +14,33 @@
       "model_solutions": {
         "ChatGPT Agent": {
           "status": "fail",
-          "solution": "By exploring the environment and executing code to find potential paths, the agent eventually reached the hidden goal state. However, it simply output the code it generated without attempting to optimize the solution, as required in the task.\n\nThis reveals a lack of planning ability: the agent could have first identified the goal state and then derived the optimal solution.\n\nIn addition, we observed intermediate outputs suggesting that the agent had, at some point, already computed the optimal sequence of steps to reach the goal state. Yet it failed to recall this information at the end, highlighting a significant weakness in its memory management.\n\nInterestingly, the agent also attempted to \"hack\" the process by inspecting source code and making API calls, though these attempts were unsuccessful."
+          "solution": "By exploring the environment and executing code to find potential paths, the agent eventually reached the hidden goal state. However, it simply output the code it generated without attempting to optimize the solution, as required in the task.\n\nThis reveals a lack of planning ability: the agent could have first identified the goal state and then derived the optimal solution.\n\nIn addition, we observed intermediate outputs suggesting that the agent had, at some point, already computed the optimal sequence of steps to reach the goal state. Yet it failed to recall this information at the end, highlighting a significant weakness in its memory management.\n\nInterestingly, the agent also attempted to \"hack\" the process by inspecting source code and making API calls, though these attempts were unsuccessful.",
+          "link": "https://chatgpt.com/share/692e0d59-9718-800c-87f2-519c6bb4e8f8"
         },
         "Gemini-3 Pro Thinking": {
           "status": "fail",
-          "solution": "Attempted to parse the page's code in an effort to hack the task but failed; did not interact with the page."
+          "solution": "Attempted to parse the page's code in an effort to hack the task but failed; did not interact with the page.",
+          "link": "assets/raw_response/Gemini-3-pro-thinking-8puzzle.txt"
         },
         "GPT-5.1": {
           "status": "fail",
-          "solution": "Failed to interact with the page."
+          "solution": "Failed to interact with the page.",
+          "link": "https://chatgpt.com/share/692e2f6f-7834-8002-ae4e-aa46b69f0d16"
         },
         "Claude-Opus-4.5": {
           "status": "fail",
-          "solution": "Unable to access the domain."
+          "solution": "Unable to access the domain.",
+          "link": "https://claude.ai/share/1d02d574-cc93-4a1a-a88b-b54899e1d39b"
         },
         "OpenAI Deep Research": {
           "status": "fail",
-          "solution": "Did not interact with the environment and hallucinated results."
+          "solution": "Did not interact with the environment and hallucinated results.",
+          "link": "assets/raw_response/Deep Research - 8-puzzle.pdf"
         },
         "Gemini-3 Pro Thinking + DeepResearch": {
           "status": "fail",
-          "solution": "Did not interact with the page; only analyzed it in text."
+          "solution": "Did not interact with the page; only analyzed it in text.",
+          "link": "https://gemini.google.com/share/d29eca13b9eb"
         }
       }
     },
@@ -50,27 +56,33 @@
       "model_solutions": {
         "ChatGPT Agent": {
           "status": "pass",
-          "solution": "Success"
+          "solution": "Success",
+          "link": "https://chatgpt.com/share/692e310e-f2b0-800b-bd1a-e88b54f3925e"
         },
         "Gemini-3 Pro Thinking": {
           "status": "pass",
-          "solution": "Success"
+          "solution": "Success",
+          "link": "assets/raw_response/Gemini-3-pro-thinking-linear.txt"
         },
         "GPT-5.1": {
           "status": "pass",
-          "solution": "Success"
+          "solution": "Success",
+          "link": "https://chatgpt.com/share/692e27cc-3a7c-8002-a8de-5432ce87fce0"
         },
         "Claude-Opus-4.5": {
           "status": "pass",
-          "solution": "Success"
+          "solution": "Success",
+          "link": "https://claude.ai/share/a65dd3af-a328-46d1-9df5-6a14f5013f1b"
         },
         "OpenAI Deep Research": {
           "status": "fail",
-          "solution": "Did not write or execute any code; hallucinated the existence of six regimes."
+          "solution": "Did not write or execute any code; hallucinated the existence of six regimes.",
+          "link": "assets/raw_response/Deep Research - LinearRegimes.pdf"
         },
         "Gemini-3 Pro Thinking + DeepResearch": {
           "status": "fail",
-          "solution": "Did not write or visualize code; only provided textual analysis."
+          "solution": "Did not write or visualize code; only provided textual analysis.",
+          "link": "https://gemini.google.com/share/69486c25a791"
         }
       }
     },
@@ -86,27 +98,33 @@
       "model_solutions": {
         "ChatGPT Agent": {
           "status": "fail",
-          "solution": "Examined the panel \"acc_inter_val_per_batch\" instead of the correct panel \"val.\""
+          "solution": "Examined the panel \"acc_inter_val_per_batch\" instead of the correct panel \"val.\"",
+          "link": "https://chatgpt.com/share/692cff83-b61c-800b-b6c5-61f14bf7b250"
         },
         "Gemini-3 Pro Thinking": {
           "status": "fail",
-          "solution": "Answered based on the paper rather than inspecting the actual Weights & Biases page."
+          "solution": "Answered based on the paper rather than inspecting the actual Weights & Biases page.",
+          "link": "assets/raw_response/Gemini-3-pro-thinking-wandb.txt"
         },
         "GPT-5.1": {
           "status": "fail",
-          "solution": "Did not detect the \"val\" panel."
+          "solution": "Did not detect the \"val\" panel.",
+          "link": "https://chatgpt.com/share/692e31d2-f5d4-8002-8263-a90630ac07ea"
         },
         "Claude-Opus-4.5": {
           "status": "fail",
-          "solution": "Unable to access the domain."
+          "solution": "Unable to access the domain.",
+          "link": "https://claude.ai/share/5cf3dd62-ea42-4e81-aa42-915b32d7951c"
         },
         "OpenAI Deep Research": {
           "status": "fail",
-          "solution": "Provided no process, only an incorrect final answer."
+          "solution": "Provided no process, only an incorrect final answer.",
+          "link": "assets/raw_response/Deep Research - wandb.pdf"
         },
         "Gemini-3 Pro Thinking + DeepResearch": {
           "status": "fail",
-          "solution": "Did not inspect the Weights & Biases page; only responded with textual analysis."
+          "solution": "Did not inspect the Weights & Biases page; only responded with textual analysis.",
+          "link": "https://gemini.google.com/share/60da471d4518"
         }
       }
     },
@@ -125,27 +143,33 @@
       "model_solutions": {
         "ChatGPT Agent": {
           "status": "pass",
-          "solution": "Success"
+          "solution": "Success",
+          "link": "https://chatgpt.com/share/692e90f1-8114-800c-bd8e-22995a40a6ae"
         },
         "Gemini-3 Pro Thinking": {
           "status": "fail",
-          "solution": "Encountered an error doing what is asked."
+          "solution": "Encountered an error doing what is asked.",
+          "link": "assets/raw_response/Gemini-3-pro-thinking-trader.txt"
         },
         "GPT-5.1": {
           "status": "fail",
-          "solution": "Recognized the interface and advertisements but failed to close the ads and interact with the page."
+          "solution": "Recognized the interface and advertisements but failed to close the ads and interact with the page.",
+          "link": "https://chatgpt.com/share/692e33cd-7180-8002-ad92-29631ea345ca"
         },
         "Claude-Opus-4.5": {
           "status": "fail",
-          "solution": "Unable to access the domain."
+          "solution": "Unable to access the domain.",
+          "link": "https://claude.ai/share/369f2a1e-0ed5-4103-bc24-a844c03d51e2"
         },
         "OpenAI Deep Research": {
           "status": "fail",
-          "solution": "Failed to identify the target items from the product images. The chips selected in the final answer do not appear on the website."
+          "solution": "Failed to identify the target items from the product images. The chips selected in the final answer do not appear on the website.",
+          "link": "assets/raw_response/Deep Research - Trader Joe.pdf"
         },
         "Gemini-3 Pro Thinking + DeepResearch": {
           "status": "fail",
-          "solution": "Failed to identify the target items from product images; selected chips not present on the website."
+          "solution": "Failed to identify the target items from product images; selected chips not present on the website.",
+          "link": "https://gemini.google.com/share/f02821ab9cb9"
         }
       }
     }

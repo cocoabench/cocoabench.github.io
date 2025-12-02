@@ -322,6 +322,10 @@ function renderSolution(panel, example, modelKey, solution, isOpen = false) {
     const logoHtml = logoPath ? `<img src="${logoPath}" alt="">` : '';
     const openAttr = isOpen ? ' open' : '';
     
+    const linkHtml = solution.link 
+        ? `<a href="${solution.link}" target="_blank" rel="noopener" class="solution-link">View solution details →</a>` 
+        : '';
+    
     panel.innerHTML = `
         <details class="solution-details"${openAttr}>
             <summary class="solution-toggle">
@@ -339,6 +343,7 @@ function renderSolution(panel, example, modelKey, solution, isOpen = false) {
             </summary>
             <div class="solution-content">
                 ${parseMarkdown(solution.solution)}
+                ${linkHtml}
             </div>
         </details>
     `;
