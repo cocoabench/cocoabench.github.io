@@ -739,7 +739,7 @@ h3 {
     display: flex;
     align-items: center;
     gap: 10px;
-    min-width: 180px;
+    min-width: 220px;
     flex-shrink: 0;
 }
 
