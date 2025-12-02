@@ -36,9 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Generate individual result cells with data-col attribute
             const resultCells = item.results.map((result, index) => {
                 const statusClass = result === 1 ? 'pass' : 'fail';
-                const link = item.links[index];
                 const colIndex = index + 4; // offset by 3 fixed columns + 1
-                return `<td class="result-cell" data-col="${colIndex}"><a href="${link}" target="_blank" rel="noopener" class="result-block ${statusClass}" title="Q${index + 1}"></a></td>`;
+                return `<td class="result-cell" data-col="${colIndex}"><span class="result-block ${statusClass}" title="Q${index + 1}"></span></td>`;
             }).join('');
             
             row.innerHTML = `
