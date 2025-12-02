@@ -12,9 +12,63 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             renderExamples(container, data.examples);
             setupTabInteraction(container);
+            handleHashNavigation(container, data.examples);
         })
         .catch(error => console.error('Error loading examples:', error));
 });
+
+/**
+ * Handle URL hash navigation to open specific example tabs
+ * Supports both #example-{id} and #example-{slug} formats
+ */
+function handleHashNavigation(container, examples) {
+    const hash = window.location.hash;
+    if (!hash) return;
+    
+    let targetExample = null;
+    
+    // Check if hash matches #example-{id} format
+    const idMatch = hash.match(/^#example-(\d+)$/);
+    if (idMatch) {
+        const id = parseInt(idMatch[1]);
+        targetExample = examples.find(ex => ex.id === id);
+    }
+    
+    // Check if hash matches #example-{slug} format (title converted to slug)
+    if (!targetExample) {
+        const slugMatch = hash.match(/^#example-(.+)$/);
+        if (slugMatch) {
+            const slug = slugMatch[1];
+            targetExample = examples.find(ex => titleToSlug(ex.title) === slug);
+        }
+    }
+    
+    // Activate the target tab if found
+    if (targetExample) {
+        const tab = container.querySelector(`.example-tab[data-example="${targetExample.id}"]`);
+        if (tab) {
+            tab.click();
+            // Smooth scroll to the examples section
+            setTimeout(() => {
+                const exampleSection = document.getElementById('example-showcase');
+                if (exampleSection) {
+                    exampleSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 100);
+        }
+    }
+}
+
+/**
+ * Convert title to URL-friendly slug
+ */
+function titleToSlug(title) {
+    return title
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '') // Remove special characters
+        .replace(/\s+/g, '-')      // Replace spaces with hyphens
+        .replace(/-+/g, '-');      // Replace multiple hyphens with single hyphen
+}
 
 /**
  * Simple Markdown parser for reasoning text

@@ -117,7 +117,7 @@
             Ideally the model should possess the ability to perceive with multimodality. Currently most mainstream models are vision and text, so we design our tasks to cover both text and image inputs.
         </p>
         <p>
-            It is important to note that <strong>there are often multiple valid perceptual pathways</strong> for completing a task. An effective agent should decide <em>which source</em> of information to read from, <em>how to preprocess or transform it</em>, and even <em>which modality</em> to rely on (e.g., plotting a figure and inspecting it would be more effective than processing raw numbers in the <a href="index.html#examples">"Linear regimes"</a> task). These choices reflect a form of metacognitive control, where the agent reasons about <em>how it should perceive</em> before reasoning about <em>what to do</em>.
+            It is important to note that <strong>there are often multiple valid perceptual pathways</strong> for completing a task. An effective agent should decide <em>which source</em> of information to read from, <em>how to preprocess or transform it</em>, and even <em>which modality</em> to rely on (e.g., plotting a figure and inspecting it would be more effective than processing raw numbers in the <a href="index.html#example-linear-regimes">"Linear regimes"</a> task). These choices reflect a form of metacognitive control, where the agent reasons about <em>how it should perceive</em> before reasoning about <em>what to do</em>.
         </p>
 
         <figure class="figure-block" style="margin: 40px 0;">
@@ -174,9 +174,9 @@
             For each task, we mark the <strong>dominant logical inference type</strong>: deductive, inductive, or abductive. Existing benchmarks typically concentrate on one direction (e.g., abductive reasoning in <a href="https://openai.com/index/browsecomp/">BrowseComp</a>, where the agent must infer a hidden target from partial clues). In contrast, CocoaBench deliberately spans all three, resulting in a more diverse set of reasoning questions.
         </p>
         <ul>
-            <li><strong>Deductive reasoning:</strong> from general rules to specific conclusions. For example, to solve the <a href="index.html#examples">"W&B logs"</a> example task, the agent is given a set of specific rules and raw logs, and expected to reach a specific conclusion.</li>
-            <li><strong>Inductive reasoning:</strong> from multiple examples to a general pattern. For example, to solve the <a href="index.html#examples">"Linear regimes"</a> example task, the agent is given a set of raw data and expected to fit a function to the data.</li>
-            <li><strong>Abductive reasoning:</strong> from observed outcomes to the most plausible explanation or hypothesis. For example, to solve the <a href="index.html#examples">"8-puzzle game"</a> example task, the agent is needs to infer the target state based on interaction with the interface.</li>
+            <li><strong>Deductive reasoning:</strong> from general rules to specific conclusions. For example, to solve the <a href="index.html#example-wb-logs">"W&B logs"</a> example task, the agent is given a set of specific rules and raw logs, and expected to reach a specific conclusion.</li>
+            <li><strong>Inductive reasoning:</strong> from multiple examples to a general pattern. For example, to solve the <a href="index.html#example-linear-regimes">"Linear regimes"</a> example task, the agent is given a set of raw data and expected to fit a function to the data.</li>
+            <li><strong>Abductive reasoning:</strong> from observed outcomes to the most plausible explanation or hypothesis. For example, to solve the <a href="index.html#example-8-puzzle-game">"8-puzzle game"</a> example task, the agent is needs to infer the target state based on interaction with the interface.</li>
         </ul>
         <p>
             Typically, tasks are mixed with all different reasoning directions. We do not treat these categories as rigid boxes. Instead, they provide a <strong>lens for analysis</strong>: for each task, we mark which directionality is most important, allowing us to ask, for example, whether agents struggle more with abductive tasks (explaining failures) than with purely deductive ones (checking constraints).
