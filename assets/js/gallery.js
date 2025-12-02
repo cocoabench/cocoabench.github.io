@@ -54,12 +54,12 @@ function getModelLogo(modelName) {
  */
 function getModelOrder() {
     return [
-        { name: 'Claude-3.5-Sonnet', subtitle: 'extended', key: 'Claude-3.5-Sonnet' },
-        'GPT-4o',
-        { name: 'Gemini-2.0-Pro', subtitle: 'Thinking', key: 'Gemini-2.0-Pro' },
-        'Llama-3.3-70B',
-        { name: 'DeepSeek-V3', subtitle: 'deep thinking', key: 'DeepSeek-V3' },
-        'Qwen-2.5-72B'
+        'ChatGPT Agent',
+        { name: 'Gemini-3 Pro', subtitle: 'Thinking', key: 'Gemini-3 Pro Thinking' },
+        { name: 'GPT-5.1', subtitle: 'thinking extended', key: 'GPT-5.1' },
+        'Claude-Opus-4.5',
+        'OpenAI Deep Research',
+        { name: 'Gemini-3 Pro', subtitle: 'Thinking + DeepResearch', key: 'Gemini-3 Pro Thinking + DeepResearch' }
     ];
 }
 
