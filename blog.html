@@ -25,6 +25,12 @@
         <p>
             In the last two years, benchmarks for LLM-based agents have proliferated. We now have standardized suites for repository-level debugging, web browsing, deep research. At first sight, this looks like straightforward progress: tasks become more realistic, reported scores increase, and new agent frameworks are released at a rapid pace.
         </p>
+
+        <figure class="figure-block" style="margin: 40px 0;">
+            <img src="./assets/figures/comparison_agentless.jpg" alt="Figure 1: Examples of agentless design patterns" style="width: 100%; max-width: 1200px; height: auto;">
+            <figcaption><strong>Figure 1:</strong> Examples of agentless design patterns in current LLM-based agent systems. The left panel shows a program-repair workflow (<a href="https://github.com/kimi-ai/kimi-dev">Kimi-Dev</a>) in which the framework predefines stages such as test generation and code editing; the LLM is invoked to complete each stage but does not control the overall plan. The right panel shows a web agent (<a href="https://github.com/ServiceNow/AgentLab">AgentLab</a>) that operates in a fixed interaction loop: at every step, the current browser state is injected into a prompt, the model produces a brief reasoning trace and an action, and this pattern is repeated uniformly throughout the episode.</figcaption>
+        </figure>
+        
         <p>
             However, a closer look at how these systems are built reveals a different pattern. For example, when we look at the leaderboard of <a href="https://www.swebench.com/">SWEBench</a>, strong performance is not necessarily produced by agents that autonomously decide <em>how</em> to solve a task, but by <strong>agentless frameworks</strong>, predefined workflows or domain-specific pipelines that merely call an LLM at designated steps (Figure 1, left). In these systems, the framework designer specifies the overall plan, and the model is only responsible for filling in local decisions within each stage.
         </p>
@@ -32,10 +38,6 @@
             Even frameworks that appear more flexible often impose a strong prior on the agent's behavior. A common pattern is to define a <strong>fixed interaction loop</strong> with the environment: at every step, the latest observation is inserted into a prompt template, the model is asked to produce a short reasoning chain, and then an action is decoded and executed (Figure 1, right). This loop is applied uniformly throughout a trajectory, regardless of the task phase, the agent's uncertainty, or the difficulty of the current subproblem. The agent may choose <em>what</em> to click or edit, but it does not choose <em>how</em> to structure its own interaction with the environment.
         </p>
 
-        <figure class="figure-block" style="margin: 40px 0;">
-            <img src="./assets/figures/comparison_agentless.jpg" alt="Figure 1: Examples of agentless design patterns" style="width: 100%; max-width: 1200px; height: auto;">
-            <figcaption><strong>Figure 1:</strong> Examples of agentless design patterns in current LLM-based agent systems. The left panel shows a program-repair workflow (<a href="https://github.com/kimi-ai/kimi-dev">Kimi-Dev</a>) in which the framework predefines stages such as test generation and code editing; the LLM is invoked to complete each stage but does not control the overall plan. The right panel shows a web agent (<a href="https://github.com/ServiceNow/AgentLab">AgentLab</a>) that operates in a fixed interaction loop: at every step, the current browser state is injected into a prompt, the model produces a brief reasoning trace and an action, and this pattern is repeated uniformly throughout the episode.</figcaption>
-        </figure>
 
         <h3>The hidden cost of static, single-domain design</h3>
         <p>
@@ -112,18 +114,25 @@
 
         <h4>Modality</h4>
         <p>
-            Ideally the model should posses the ability to perceive with multimodality. Currently most mainstream models are vision and text, so we design our tasks to cover both text and image inputs.
+            Ideally the model should possess the ability to perceive with multimodality. Currently most mainstream models are vision and text, so we design our tasks to cover both text and image inputs.
         </p>
         <p>
             It is important to note that <strong>there are often multiple valid perceptual pathways</strong> for completing a task. An effective agent should decide <em>which source</em> of information to read from, <em>how to preprocess or transform it</em>, and even <em>which modality</em> to rely on (e.g., plotting a figure and inspecting it would be more effective than processing raw numbers in the <a href="index.html#examples">"Linear regimes"</a> task). These choices reflect a form of metacognitive control, where the agent reasons about <em>how it should perceive</em> before reasoning about <em>what to do</em>.
         </p>
+
+        <figure class="figure-block" style="margin: 40px 0;">
+            <img src="./assets/figures/perception_labels_distribution.png" alt="Figure 4: Perception labels distribution" style="width: 100%; max-width: 1200px; height: auto;">
+            <figcaption><strong>Figure 4:</strong> Distribution of perception sources (left) and preprocessing methods (right) across CocoaBench tasks.</figcaption>
+        </figure>
+
+        
 
         <h3>Memory</h3>
         <p>
             Following the <a href="https://arxiv.org/abs/2309.02427">CoALA framework</a> for language agents, we view memory as a <strong>modular hierarchy</strong>: a short-term <strong>working memory</strong>, and several long-term memories—episodic (experience), semantic (knowledge), and procedural (skills and routines).
         </p>
         <p>
-            In this work, we focus on <strong>working memory</strong> and <strong>procedural memory</strong>, which are most directly exposed in our tasks, and effective managing them remains open research questions:
+            In this work, we focus on <strong>working memory</strong> and <strong>procedural memory</strong>, which are most directly exposed in our tasks, and effectively managing them remains open research questions:
         </p>
 
         <h4>Working memory</h4>
@@ -160,14 +169,14 @@
             These tasks cannot be solved by a few actions: the agent must decide on a multi-step plan based on the tools it can use and its own capabilities. For all the tasks, we provide a <strong>reference plan</strong> that describes one reasonable solution path.
         </p>
 
-        <h4>Reasoning directionality</h4>
+        <h4>Logical inference type</h4>
         <p>
-            For each task, we mark the <strong>dominant direction of reasoning</strong>: deductive, inductive, or abductive. Existing benchmarks typically concentrate on one direction (e.g., abductive reasoning in <a href="https://openai.com/index/browsecomp/">BrowseComp</a>, where the agent must infer a hidden target from partial clues). In contrast, CocoaBench deliberately spans all three, resulting in a more diverse set of reasoning questions.
+            For each task, we mark the <strong>dominant logical inference type</strong>: deductive, inductive, or abductive. Existing benchmarks typically concentrate on one direction (e.g., abductive reasoning in <a href="https://openai.com/index/browsecomp/">BrowseComp</a>, where the agent must infer a hidden target from partial clues). In contrast, CocoaBench deliberately spans all three, resulting in a more diverse set of reasoning questions.
         </p>
         <ul>
-            <li><strong>Deductive reasoning:</strong> from general rules to specific conclusions. For example, the agent is given a set of specific rules and raw logs, and expected to answer a question.</li>
-            <li><strong>Inductive reasoning:</strong> from multiple examples to a general pattern. For example, the agent is asked to fit a function from raw plots.</li>
-            <li><strong>Abductive reasoning:</strong> from observed outcomes to the most plausible explanation or hypothesis. For example, the agent is required to discover correct configurations from observation.</li>
+            <li><strong>Deductive reasoning:</strong> from general rules to specific conclusions. For example, to solve the <a href="index.html#examples">"W&B logs"</a> example task, the agent is given a set of specific rules and raw logs, and expected to reach a specific conclusion.</li>
+            <li><strong>Inductive reasoning:</strong> from multiple examples to a general pattern. For example, to solve the <a href="index.html#examples">"Linear regimes"</a> example task, the agent is given a set of raw data and expected to fit a function to the data.</li>
+            <li><strong>Abductive reasoning:</strong> from observed outcomes to the most plausible explanation or hypothesis. For example, to solve the <a href="index.html#examples">"8-puzzle game"</a> example task, the agent is needs to infer the target state based on interaction with the interface.</li>
         </ul>
         <p>
             Typically, tasks are mixed with all different reasoning directions. We do not treat these categories as rigid boxes. Instead, they provide a <strong>lens for analysis</strong>: for each task, we mark which directionality is most important, allowing us to ask, for example, whether agents struggle more with abductive tasks (explaining failures) than with purely deductive ones (checking constraints).
