@@ -739,7 +739,7 @@ h3 {
     display: flex;
     align-items: center;
     gap: 10px;
-    min-width: 180px;
+    min-width: 220px;
     flex-shrink: 0;
 }
 
@@ -2227,6 +2227,24 @@ h3 {
 
 .solution-content p:last-child {
     margin-bottom: 0;
+}
+
+.solution-link {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #5D4037;
+    background: #EFEBE9;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.solution-link:hover {
+    background: #D7CCC8;
+    color: #3E2723;
 }
 
 .solution-content strong {

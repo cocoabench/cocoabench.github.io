@@ -54,12 +54,12 @@ function getModelLogo(modelName) {
  */
 function getModelOrder() {
     return [
-        { name: 'Claude-3.5-Sonnet', subtitle: 'extended', key: 'Claude-3.5-Sonnet' },
-        'GPT-4o',
-        { name: 'Gemini-2.0-Pro', subtitle: 'Thinking', key: 'Gemini-2.0-Pro' },
-        'Llama-3.3-70B',
-        { name: 'DeepSeek-V3', subtitle: 'deep thinking', key: 'DeepSeek-V3' },
-        'Qwen-2.5-72B'
+        'ChatGPT Agent',
+        { name: 'Gemini-3 Pro', subtitle: 'Thinking', key: 'Gemini-3 Pro Thinking' },
+        { name: 'GPT-5.1', subtitle: 'thinking extended', key: 'GPT-5.1' },
+        'Claude-Opus-4.5',
+        'OpenAI Deep Research',
+        { name: 'Gemini-3 Pro', subtitle: 'Thinking + DeepResearch', key: 'Gemini-3 Pro Thinking + DeepResearch' }
     ];
 }
 
@@ -250,7 +250,8 @@ function setupGalleryInteraction(container) {
     let activeBlock = null;
     
     // Helper function to select a block
-    function selectBlock(block) {
+    // @param {boolean} openByDefault - Whether to open the solution panel (default: false)
+    function selectBlock(block, openByDefault = false) {
         const exampleId = parseInt(block.getAttribute('data-example-id'));
         const modelName = block.getAttribute('data-model');
         
@@ -270,8 +271,8 @@ function setupGalleryInteraction(container) {
         const solution = example.model_solutions?.[modelName];
         if (!solution) return;
         
-        // Render solution (collapsed by default)
-        renderSolution(panel, example, modelName, solution, false);
+        // Render solution
+        renderSolution(panel, example, modelName, solution, openByDefault);
     }
     
     blocks.forEach(block => {
@@ -294,9 +295,9 @@ function setupGalleryInteraction(container) {
         });
     });
     
-    // Auto-select first cell on load
+    // Auto-select first cell on load and open the solution panel
     if (blocks.length > 0) {
-        selectBlock(blocks[0]);
+        selectBlock(blocks[0], true);
     }
 }
 
@@ -321,6 +322,10 @@ function renderSolution(panel, example, modelKey, solution, isOpen = false) {
     const logoHtml = logoPath ? `<img src="${logoPath}" alt="">` : '';
     const openAttr = isOpen ? ' open' : '';
     
+    const linkHtml = solution.link 
+        ? `<a href="${solution.link}" target="_blank" rel="noopener" class="solution-link">View solution details →</a>` 
+        : '';
+    
     panel.innerHTML = `
         <details class="solution-details"${openAttr}>
             <summary class="solution-toggle">
@@ -338,6 +343,7 @@ function renderSolution(panel, example, modelKey, solution, isOpen = false) {
             </summary>
             <div class="solution-content">
                 ${parseMarkdown(solution.solution)}
+                ${linkHtml}
             </div>
         </details>
     `;
