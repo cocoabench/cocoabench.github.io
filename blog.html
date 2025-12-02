@@ -16,8 +16,8 @@
         </nav>
     </header>
     <div class="container">
-        <p style="font-size: 14px; color: #666; margin-bottom: 10px;">November 30, 2025</p>
-        <h1>CocoaBench: Towards General Agent with Flexible Cognition</h1>
+        <p style="font-size: 14px; color: #666; margin-bottom: 10px;">December 2, 2025</p>
+        <h1>CocoaBench: Towards General Agent with Compositional Cognitive Abilities</h1>
         <p class="subtitle">By The CocoaBench Team</p>
         <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
 
@@ -87,7 +87,7 @@
 
         <figure class="figure-block" style="margin: 40px 0;">
             <img src="./assets/figures/architecture.jpg" alt="Cognitive Architecture Diagram" style="width: 75%; height: auto;">
-            <figcaption><strong>Figure 3:</strong> The three core cognitive abilities evaluated in CocoaBench: Perception, Reasoning, and Memory, and how they interact with the world and within the agent.</figcaption>
+            <figcaption><strong>Figure 3:</strong> The three core cognitive abilities highlighted in CocoaBench: Perception, Reasoning, and Memory, and how they interact with the world and within the agent.</figcaption>
         </figure>
 
         <h3>Perception</h3>
@@ -194,34 +194,29 @@
             We use simple 0/1 labels for symbolic and visual reasoning on each task, and they can overlap when both skills are required.
         </p>
 
+        <h2>Evaluation</h2>
+        <p>
+            Our current benchmark (CocoaBench-0.1) includes 25 human-curated tasks. We evaluate several commercial agent systems on the benchmark. Our evaluation reveals several important findings:
+        </p>
+        <ul>
+            <li>Our benchmark proves to be highly challenging: none of the systems are able to correctly complete more than 50% of the tasks.</li>
+            <li>Among all tested agents, the OpenAI Agent remains the state-of-the-art, demonstrating the strongest cognitive capabilities across multiple dimensions.</li>
+            <li>Hallucination remains a major issue across all agents: extraneous or erroneous outputs frequently compromise correctness.</li>
+        </ul>
+
+        <p>
+            See our <a href="leaderboard.html">leaderboard</a> and case studies on <a href="index.html#example-showcase">example tasks</a>.
+        </p>
+
         <h2>The CocoaAgent Framework</h2>
         <p>
             To enable rigorous evaluation and empower researchers to develop their own agents, we built the <strong><a href="https://github.com/cocoabench/cocoa-agent">CocoaAgent</a></strong> framework. CocoaAgent provides seamless integration with <a href="https://github.com/agent-infra/sandbox">AIO Sandbox</a>, an all-in-one Docker environment. It equips agents with a full suite of tools—browser automation, terminal access, file operations, and code interpreters—enabling them to operate like human developers in realistic settings. Our framework is model-agnostic, and we provide example scripts for running agents with both open-source LLMs such as Qwen3-VL and commercial models such as GPT-5.1. To support robust evaluation at scale, CocoaAgent implements both dynamic runtime tests for verifying computational correctness and lightweight static-matching checks for deterministic answers. We are currently producing comprehensive results on CocoaBench using this framework, which will be available soon on our leaderboard.
         </p>
 
-        <h3>Evaluation and Next Steps (Placeholder now!)</h3>
+        <h2>Future Work</h2>
         <p>
-            We are currently evaluating various state-of-the-art models and agent frameworks on CocoaBench. Results and detailed analysis will be available soon on our <a href="leaderboard.html">Leaderboard</a> page.
+            We are continuously building and improving CocoaBench. Collaboration is welcomed! CocoaBench benefits from collaborators with diverse backgrounds. We invite you to bring your interesting ideas and use cases for agents to the community. Feel free to reach out to us or join our <a href="https://discord.gg/FPmARXjz" target="_blank">Discord community</a> to propose new tasks or discuss ideas. We will be also setting up a task contribution protocol soon.
         </p>
-        <p>
-            Our development framework and evaluation scripts are open-sourced and available on <a href="https://github.com/cocoa-bench/cocoa-bench">GitHub</a>, making it straightforward for researchers to evaluate their own agents within a lightweight sandbox environment.
-        </p>
-
-        <h3>Discussion and Future Work (Placeholder now!)</h3>
-        <p>
-            Looking ahead, we see several exciting directions for future work:
-        </p>
-        <ul>
-            <li><strong>Multi-agent systems:</strong> Exploring specialized models for different cognitive functions (e.g., specialized model for GUI operation)</li>
-            <li><strong>Extended memory systems:</strong> Investigating episodic and semantic memory beyond working and procedural memory</li>
-            <li><strong>Meta-learning:</strong> Developing agents that can learn how to learn across tasks</li>
-        </ul>
-
-        <h3>Join Us</h3>
-        <p>
-            We are continuously building and improving CocoaBench. Collaboration is welcomed! Feel free to reach out to us or join our <a href="https://discord.gg/FPmARXjz" target="_blank">Discord community</a>.
-        </p>
-
 
         <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
         <p style="font-size: 14px; color: #999;">
