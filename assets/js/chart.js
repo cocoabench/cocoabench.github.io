@@ -21,6 +21,19 @@
         }
     }
 
+    function renderModelName(item) {
+        const subtitleHtml = item.subtitle 
+            ? `<span class="model-subtitle">${item.subtitle}</span>` 
+            : '';
+        
+        return `
+            <span class="model-name-group">
+                <span class="model-main-name">${item.model}</span>
+                ${subtitleHtml}
+            </span>
+        `;
+    }
+
     function createBarChart(data, container) {
         // Sort by pass_rate descending
         const sortedData = [...data].sort((a, b) => b.pass_rate - a.pass_rate);
@@ -36,7 +49,7 @@
                 <div class="bar-row" style="--delay: ${delay}s">
                     <div class="bar-label">
                         ${logoSrc ? `<img src="${logoSrc}" alt="${item.organization}" class="bar-logo">` : ''}
-                        <span class="bar-model-name">${item.model}</span>
+                        ${renderModelName(item)}
                     </div>
                     <div class="bar-container">
                         <div class="bar-fill" style="--target-width: ${barWidth}%"></div>

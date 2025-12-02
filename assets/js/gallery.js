@@ -47,16 +47,51 @@ function getModelLogo(modelName) {
 
 /**
  * Get ordered list of models (consistent ordering)
+ * Each entry can be a string (model name) or object with {name, subtitle, key}
+ * - name: display name
+ * - subtitle: optional subtitle (e.g., "extended thinking")
+ * - key: optional key for looking up in model_solutions (defaults to name)
  */
 function getModelOrder() {
     return [
-        'Claude-3.5-Sonnet',
+        { name: 'Claude-3.5-Sonnet', subtitle: 'extended', key: 'Claude-3.5-Sonnet' },
         'GPT-4o',
-        'Gemini-2.0-Pro',
+        { name: 'Gemini-2.0-Pro', subtitle: 'Thinking', key: 'Gemini-2.0-Pro' },
         'Llama-3.3-70B',
-        'DeepSeek-V3',
+        { name: 'DeepSeek-V3', subtitle: 'deep thinking', key: 'DeepSeek-V3' },
         'Qwen-2.5-72B'
     ];
+}
+
+/**
+ * Parse model entry from getModelOrder()
+ * @returns {Object} {name, subtitle, key}
+ */
+function parseModelEntry(entry) {
+    if (typeof entry === 'string') {
+        return { name: entry, subtitle: null, key: entry };
+    }
+    return {
+        name: entry.name,
+        subtitle: entry.subtitle || null,
+        key: entry.key || entry.name
+    };
+}
+
+/**
+ * Render model name with optional subtitle
+ */
+function renderModelNameGroup(name, subtitle) {
+    const subtitleHtml = subtitle 
+        ? `<span class="model-subtitle">${subtitle}</span>` 
+        : '';
+    
+    return `
+        <span class="model-name-group">
+            <span class="model-main-name">${name}</span>
+            ${subtitleHtml}
+        </span>
+    `;
 }
 
 /**
@@ -123,7 +158,7 @@ function parseMarkdown(text) {
  * Render the gallery grid and solution panel
  */
 function renderGallery(container, examples) {
-    const models = getModelOrder();
+    const modelEntries = getModelOrder();
     
     // Build header row with example titles
     const headerCells = examples.map(ex => 
@@ -131,25 +166,28 @@ function renderGallery(container, examples) {
     ).join('');
     
     // Build model rows
-    const modelRows = models.map(model => {
+    const modelRows = modelEntries.map(entry => {
+        const { name, subtitle, key } = parseModelEntry(entry);
+        
         const cells = examples.map(ex => {
-            const solution = ex.model_solutions?.[model];
+            const solution = ex.model_solutions?.[key];
             if (!solution) {
                 return `<td class="gallery-cell"><span class="result-block-mini na" title="N/A"></span></td>`;
             }
             const statusClass = solution.status === 'pass' ? 'pass' : 'fail';
+            const displayName = subtitle ? `${name} (${subtitle})` : name;
             return `
                 <td class="gallery-cell">
                     <button class="result-block-mini ${statusClass}" 
                             data-example-id="${ex.id}" 
-                            data-model="${model}"
-                            title="${model} - ${ex.title}: ${solution.status === 'pass' ? 'Pass' : 'Fail'}">
+                            data-model="${key}"
+                            title="${displayName} - ${ex.title}: ${solution.status === 'pass' ? 'Pass' : 'Fail'}">
                     </button>
                 </td>
             `;
         }).join('');
         
-        const logoPath = getModelLogo(model);
+        const logoPath = getModelLogo(name);
         const logoHtml = logoPath ? `<img src="${logoPath}" alt="" class="gallery-model-logo">` : '';
         
         return `
@@ -157,7 +195,7 @@ function renderGallery(container, examples) {
                 <td class="gallery-model-cell">
                     <span class="gallery-model-cell-inner">
                         ${logoHtml}
-                        <span class="gallery-model-name">${model}</span>
+                        ${renderModelNameGroup(name, subtitle)}
                     </span>
                 </td>
                 ${cells}
@@ -267,11 +305,19 @@ function setupGalleryInteraction(container) {
  * Render solution in panel with collapsible content
  * @param {boolean} isOpen - Whether details should be open (default: false)
  */
-function renderSolution(panel, example, modelName, solution, isOpen = false) {
+function renderSolution(panel, example, modelKey, solution, isOpen = false) {
+    // Find model entry to get display name and subtitle
+    const modelEntries = getModelOrder();
+    const entry = modelEntries.find(e => {
+        const { key } = parseModelEntry(e);
+        return key === modelKey;
+    });
+    const { name, subtitle } = entry ? parseModelEntry(entry) : { name: modelKey, subtitle: null };
+    
     const statusClass = solution.status === 'pass' ? 'pass' : 'fail';
     const statusIcon = solution.status === 'pass' ? '✓' : '✗';
     const statusText = solution.status === 'pass' ? 'Pass' : 'Fail';
-    const logoPath = getModelLogo(modelName);
+    const logoPath = getModelLogo(name);
     const logoHtml = logoPath ? `<img src="${logoPath}" alt="">` : '';
     const openAttr = isOpen ? ' open' : '';
     
@@ -280,7 +326,7 @@ function renderSolution(panel, example, modelName, solution, isOpen = false) {
             <summary class="solution-toggle">
                 <div class="solution-toggle-left">
                     ${logoHtml}
-                    <span class="solution-model-name">${modelName}</span>
+                    ${renderModelNameGroup(name, subtitle)}
                     <span class="solution-separator">·</span>
                     <span class="solution-example-title">${example.title}</span>
                 </div>

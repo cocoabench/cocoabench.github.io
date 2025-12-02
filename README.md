@@ -4,18 +4,23 @@
 
 ```
 cocoabench/
-├── index.html          # Home page (Introduction)
-├── leaderboard.html    # Leaderboard page
-├── blog.html           # Blog page
+├── index.html              # Home page (Introduction, Examples, Gallery)
+├── leaderboard.html        # Leaderboard page
+├── blog.html               # Blog page
 └── assets/
     ├── css/
-    │   └── style.css   # Global styles
+    │   └── style.css       # Global styles
     ├── js/
-    │   ├── logo.js     # Logo animation
-    │   └── table.js    # Leaderboard table logic
+    │   ├── logo.js         # Logo animation
+    │   ├── table.js        # Leaderboard table rendering
+    │   ├── chart.js        # Performance bar chart
+    │   ├── gallery.js      # Solution gallery component
+    │   ├── examples.js     # Example showcase component
+    │   └── toc.js          # Table of contents
     ├── data/
-    │   └── data.json   # Leaderboard data
-    └── logos/          # Model provider logos
+    │   ├── data.json       # Leaderboard & chart data
+    │   └── examples.json   # Example tasks & model solutions
+    └── logos/              # Model provider logos
         ├── anthropic.png
         ├── openai.png
         ├── google.png
@@ -58,6 +63,121 @@ Open HTML files directly in browser, or use a local server:
 python -m http.server 8000
 # Then visit http://localhost:8000
 ```
+
+---
+
+## Data Structure Reference
+
+### Overview
+
+| File | Location | Used By |
+|------|----------|---------|
+| `data.json` | `assets/data/` | Leaderboard table, Performance bar chart |
+| `examples.json` | `assets/data/` | Example showcase, Solution gallery |
+
+---
+
+### `data.json` — Leaderboard Data
+
+Each entry represents one model row in the leaderboard:
+
+```json
+{
+    "rank": 2,
+    "model": "Gemini-3 Pro",
+    "subtitle": "Thinking",          // Optional - displays below model name
+    "organization": "Google",
+    "pass_rate": 36.0,
+    "results": [0, 1, 1, 0, ...],    // 1=pass, 0=fail for each question
+    "links": ["https://...", ...]    // Link for each result cell
+}
+```
+
+#### Fields
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `rank` | ✓ | Display rank (integer) |
+| `model` | ✓ | Model display name |
+| `subtitle` | ✗ | Secondary label (e.g., "extended", "Thinking") — renders in italic below the model name |
+| `organization` | ✓ | Must match a logo filename in `assets/logos/` |
+| `pass_rate` | ✓ | Score percentage |
+| `results` | ✓ | Array of 0/1 for each question |
+| `links` | ✓ | Array of URLs (same length as results) |
+
+#### Handling Model Variants
+
+For the same model with different modes (e.g., GPT-4o vs GPT-4o with thinking), add separate entries:
+
+```json
+{ "rank": 3, "model": "GPT-4o", "organization": "OpenAI", ... },
+{ "rank": 4, "model": "GPT-4o", "subtitle": "Thinking", "organization": "OpenAI", ... }
+```
+
+---
+
+### `examples.json` — Example Tasks & Model Solutions
+
+Structure:
+
+```json
+{
+  "examples": [
+    {
+      "id": 1,
+      "title": "Task Title",
+      "type": "text" | "embed",
+      "content": { ... },
+      "answer": "...",
+      "reasoning": "...",
+      "model_solutions": {
+        "Model-Key": {
+          "status": "pass" | "fail",
+          "solution": "Markdown content..."
+        }
+      }
+    }
+  ]
+}
+```
+
+#### Model Solutions Keys
+
+The `model_solutions` keys are looked up by `gallery.js`. To configure which models appear and their display names, edit `getModelOrder()` in `assets/js/gallery.js`:
+
+```javascript
+function getModelOrder() {
+    return [
+        'Claude-3.5-Sonnet',                                              // Simple: key = display name
+        { name: 'GPT-4o', subtitle: 'Thinking', key: 'GPT-4o-thinking' }, // With subtitle
+        'Gemini-2.0-Pro',
+    ];
+}
+```
+
+| Property | Description |
+|----------|-------------|
+| `name` | Display name |
+| `subtitle` | Optional secondary label |
+| `key` | Key to match in `model_solutions` (defaults to `name`) |
+
+#### Example: Adding a Model Variant
+
+1. In `examples.json`, add solutions with a unique key:
+   ```json
+   "model_solutions": {
+       "GPT-4o": { "status": "pass", "solution": "..." },
+       "GPT-4o-thinking": { "status": "pass", "solution": "..." }
+   }
+   ```
+
+2. In `gallery.js`, update `getModelOrder()`:
+   ```javascript
+   return [
+       { name: 'GPT-4o', key: 'GPT-4o' },
+       { name: 'GPT-4o', subtitle: 'Thinking', key: 'GPT-4o-thinking' },
+   ];
+   ```
 
 ---
 

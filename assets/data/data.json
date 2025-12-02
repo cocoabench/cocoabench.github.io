@@ -61,7 +61,8 @@
     },
     {
         "rank": 2,
-        "model": "Gemini-3 Pro Thinking",
+        "model": "Gemini-3 Pro",
+        "subtitle": "Thinking",
         "organization": "Google",
         "pass_rate": 36.0,
         "results": [
@@ -121,7 +122,8 @@
     },
     {
         "rank": 3,
-        "model": "GPT5.1-thinking (extended)",
+        "model": "GPT-5.1",
+        "subtitle": "extended thinking",
         "organization": "OpenAI",
         "pass_rate": 32.0,
         "results": [
@@ -181,7 +183,8 @@
     },
     {
         "rank": 4,
-        "model": "Claude-Opus-4.5 (extended)",
+        "model": "Claude-Opus-4.5",
+        "subtitle": "extended",
         "organization": "Anthropic",
         "pass_rate": 28.0,
         "results": [
@@ -301,7 +304,8 @@
     },
     {
         "rank": 6,
-        "model": "Gemini-3 Pro Thinking + DeepResearch",
+        "model": "Gemini-3 Pro",
+        "subtitle": "Thinking + DeepResearch",
         "organization": "Google",
         "pass_rate": 16.0,
         "results": [

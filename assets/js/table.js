@@ -13,6 +13,19 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('Error loading leaderboard data:', error));
 
+    function renderModelName(item) {
+        const subtitleHtml = item.subtitle 
+            ? `<span class="model-subtitle">${item.subtitle}</span>` 
+            : '';
+        
+        return `
+            <span class="model-name-group">
+                <span class="model-main-name">${item.model}</span>
+                ${subtitleHtml}
+            </span>
+        `;
+    }
+
     function renderTable(data) {
         tableBody.innerHTML = '';
         
@@ -30,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             row.innerHTML = `
                 <td class="rank-cell">${item.rank}</td>
-                <td class="model-name"><img src="${logoPath}" alt="${item.organization}" class="model-logo">${item.model}</td>
+                <td class="model-name"><img src="${logoPath}" alt="${item.organization}" class="model-logo">${renderModelName(item)}</td>
                 <td class="score-cell">${item.pass_rate}%</td>
                 ${resultCells}
             `;
