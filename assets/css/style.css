@@ -2445,16 +2445,22 @@ h3 {
         display: flex;
     }
     
+    /* Only show overlay when active to avoid stray touch targets */
     .has-toc .toc-overlay {
-        display: block;
+        display: none;
         pointer-events: none;
     }
     
     .has-toc .toc-overlay.active {
+        display: block;
         pointer-events: auto;
     }
     
     .has-toc .toc-drawer {
+        display: none;
+    }
+    
+    .has-toc .toc-drawer.active {
         display: block;
     }
 }
