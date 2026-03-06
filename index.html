@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="CocoaBench is an evaluation framework for general agents with compositional cognitive abilities across perception, reasoning, and memory.">
+    <meta name="description" content="CocoaBench: Evaluating Unified Digital Agents in the Wild">
     <link rel="canonical" href="https://cocoabench.github.io/">
     <title>CocoaBench | Introduction</title>
     <!-- Open Graph -->
     <meta property="og:title" content="CocoaBench | Compositional Cognitive Agents Benchmark">
-    <meta property="og:description" content="CocoaBench is an evaluation framework for general agents with compositional cognitive abilities across perception, reasoning, and memory.">
+    <meta property="og:description" content="CocoaBench: Evaluating Unified Digital Agents in the Wild">
     <meta property="og:url" content="https://cocoabench.github.io/">
     <meta property="og:site_name" content="CocoaBench">
     <meta property="og:type" content="website">
@@ -16,7 +16,7 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="CocoaBench | Compositional Cognitive Agents Benchmark">
-    <meta name="twitter:description" content="CocoaBench is an evaluation framework for general agents with compositional cognitive abilities across perception, reasoning, and memory.">
+    <meta name="twitter:description" content="CocoaBench: Evaluating Unified Digital Agents in the Wild">
     <meta name="twitter:image" content="https://cocoabench.github.io/assets/figures/architecture.jpg">
     <meta name="twitter:site" content="@cocoabench">
     <link rel="stylesheet" href="./assets/css/style.css">
@@ -39,7 +39,7 @@
           "url": "https://cocoabench.github.io/",
           "sameAs": [
             "https://github.com/cocoabench",
-            "https://discord.gg/ZDaDhVCd"
+            "https://discord.gg/cbUx7pEN"
           ]
         },
         {
@@ -47,7 +47,7 @@
           "@id": "https://cocoabench.github.io/#website",
           "url": "https://cocoabench.github.io/",
           "name": "CocoaBench",
-          "description": "CocoaBench is an evaluation framework for general agents with compositional cognitive abilities across perception, reasoning, and memory.",
+          "description": "CocoaBench: Evaluating Unified Digital Agents in the Wild",
           "publisher": {
             "@id": "https://cocoabench.github.io/#org"
           }
@@ -67,7 +67,7 @@
     </header>
     <div class="container">
         <h1>CocoaBench</h1>
-        <p class="subtitle">An Evaluation Framework for General Agents with Compositional Cognitive Abilities</p>
+        <p class="subtitle">Evaluating Unified Digital Agents in the Wild</p>
         <div class="resource-links">
             <a href="blog.html" class="resource-link">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -84,7 +84,7 @@
                 </svg>
                 GitHub
             </a>
-            <a href="assets/data/cocoa-bench-v0.1.zip" class="resource-link">
+            <a href="https://github.com/cocoabench/cocoa-agent/tree/main/cocoabench-v0.2" class="resource-link">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
                     <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
@@ -95,15 +95,15 @@
         </div>
         <h2>Overview</h2>
         <ul>
-            <li> We focus on evaluating <strong>general agents</strong> on highly complex tasks, while only requiring them to operate a <em>set of general tools</em> (browser, code execution, file systems, etc.). See <a href="#examples">examples</a> below.</li>
-            <li>We design the benchmark around <strong>cognitive abilities</strong> rather than specific tools. The interfaces through which LLMs interact with the world will change, but the underlying abilities required, <em>perception, reasoning, and memory</em>, remain unchanged. See our blog post <a href="blog.html">here</a>.</li>
-            <li>The benchmark is <strong>easy to use</strong>: tasks are human-understandable, automatically evaluated by scripts. We additionally developed a framework makes it straightforward to evaluate any models within a lightweight sandbox. See the github repo <a href="https://github.com/cocoabench/cocoa-agent">here</a>.</li>
+            <li>Evaluates <strong>unified digital agents</strong> that combine GUI interaction, coding, and tool use.</li>
+            <li>Features long-horizon tasks, diverse scenarios, and challenging levels of difficulty (<a href="#examples">examples</a>).</li>
+            <li>Provides an <a href="https://github.com/cocoabench/cocoa-agent">agent framework</a> and a sandboxed environment for reproducible evaluation.</li>
         </ul>
         <!-- <figure class="figure-block">
             <img src="https://placehold.co/720x360/f4f4f4/888?text=CocoaBench+Architecture&font=roboto" alt="CocoaBench Architecture Diagram" class="figure-image">
             <figcaption>Figure 1: CocoaBench Architecture Diagram — showing the interaction between agents, environments, and evaluation metrics.</figcaption>
         </figure> -->
-        <h2>Examples</h2>
+        <h2 id="examples">Examples</h2>
         <p>
             Here are some example tasks from CocoaBench, showcasing the diverse reasoning challenges our benchmark presents.
         </p>
@@ -160,7 +160,7 @@
             We've set up a streamlined <a href="https://github.com/cocoabench/cocoa-agent/blob/main/contrib/CONTRIBUTING.md" target="_blank">task contribution protocol</a> to guide you through creating and submitting new tasks. Contributors with <strong>3 accepted tasks</strong> are eligible for co-authorship on the CocoaBench paper, which we plan to submit to a top-tier ML conference.
         </p>
         <p>
-            Have questions or ideas? Feel free to reach out to us or join our <a href="https://discord.gg/ZDaDhVCd" target="_blank">Discord community</a> to propose new tasks or discuss ideas. (If the link doesn't work, try refreshing the page or manually add the server in Discord app using invite code: <code>ZDaDhVCd</code>)
+            Have questions or ideas? Feel free to reach out to us or join our <a href="https://discord.gg/cbUx7pEN" target="_blank">Discord community</a> to propose new tasks or discuss ideas. (If the link doesn't work, try refreshing the page or manually add the server in Discord app using invite code: <code>cbUx7pEN</code>)
         </p>
 
         <h2>Citation</h2>

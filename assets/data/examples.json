@@ -45,44 +45,47 @@
       }
     },
     {
-      "id": 2,
-      "title": "Linear regimes",
-      "type": "text",
+      "id": 4,
+      "title": "Trader Joe lover",
+      "type": "embed",
       "content": {
-        "question": "Given historical <a href=\"./assets/data/linear_regimes_data.csv\" target=\"_blank\" rel=\"noopener\">time series data</a> showing variable y as a function of time t, estimate how many linear regimes best explain the relationship. Return a JSON object with: regime_count (integer) and breakpoints (array of dates in ascending order). A tolerance of ±7 days is acceptable when evaluating breakpoint correctness."
+        "url": "https://leoii22.com/pages/amazon",
+        "embedPosition": "top",
+        "question": "You are logging into the company's internal discount shopping portal to buy some snacks for a party. Your goal is to purchase specific <strong>Trader Joe's</strong> and <strong>Terra</strong> brand chips for three colleagues and yourself based on the following specific requests:<br><br><strong>Alice (The Sugar Cutter):</strong> \"I'm strictly limiting my sugar. Out of these specific brands, find the bag with the absolute lowest Total Sugars per serving. Get me 1 bag of that.\"<br><br><strong>Bob (The Sodium Watcher):</strong> \"My doctor is watching my salt intake. Compare the labels of these brands and find the one with the absolute lowest Sodium per serving. I want 2 bags of that one.\"<br><br><strong>Charlie (The Quant):</strong> \"I have a specific calculation for nutrient density. Apply this formula to the available Trader Joe's and Terra options using their % Daily Values (%DV):<br><em>Score = (%DV Total Fat + %DV Sodium + %DV Added Sugars + (Calories / 21.18)) - (1.48 * %DV Dietary Fiber + %DV Protein)</em><br>I want the item with the lowest Score (which indicates the best balance). Get me 3 bags of that winner.\"<br><br><strong>You (The Review Truster):</strong><br>You decide to stock up for yourself as well. Look at the user ratings displayed on the site for these specific Trader Joe's and Terra chips. You want to buy 2 bags of the item with the highest user rating and 2 bags of the item with the second highest user rating.<br><br>You need to find the correct items on the site, add the specified quantities to your cart, and report the \"Total\" displayed on the checkout screen.",
+        "height": 500
       },
-      "answer": "{\"regime_count\": 3, \"breakpoints\": [\"2024-07-27\", \"2025-02-16\"]}",
-      "reasoning": "**Step 1: Load and visualize the data**\n\nDownloaded the CSV file and plotted y vs t. Visual inspection reveals clear changes in slope at multiple points, suggesting distinct linear regimes.\n\n**Step 2: Statistical breakpoint detection**\n\nApplied piecewise linear regression with breakpoint detection:\n- Used Bayesian Information Criterion (BIC) to determine optimal number of segments\n- Tested models with 1-5 regimes\n- BIC scores: [1845.2, 1523.4, **1198.7**, 1205.3, 1218.9]\n- **Optimal: 3 regimes** (minimum BIC)\n\n**Step 3: Identify breakpoint dates**\n\nUsing the 3-regime model, estimated breakpoints:\n\n| Regime | Date Range | Slope | R² |\n|--------|------------|-------|----|\n| 1 | Start - 2022-03-15 | 0.042 | 0.94 |\n| 2 | 2022-03-15 - 2023-07-22 | -0.018 | 0.91 |\n| 3 | 2023-07-22 - End | 0.065 | 0.96 |\n\n**Step 4: Validate breakpoints**\n\nPerformed Chow test at detected breakpoints:\n- First breakpoint (2022-03-15): F-statistic = 247.3, p < 0.001 ✓\n- Second breakpoint (2023-07-22): F-statistic = 189.7, p < 0.001 ✓\n\nBoth breakpoints are statistically significant.\n\n**Final answer:**\n```\n{\n  \"regime_count\": 3,\n  \"breakpoints\": [\"2022-03-15\", \"2023-07-22\"]\n}\n```",
+      "answer": "$56.36",
+      "reasoning": "**Step 1: Navigate to the chips section**\n\nClicked on Departments → Snacks & Chips. Found a list sorted by rating:\n\n| Product | Price |\n|---------|-------|\n| Pink Lady Apple Chips | $6.99 |\n| Crunchy Flamin' Hot Snacks | $4.98 |\n| Ridged Cheddar and Sour Cream Chips | $4.79 |\n| Nacho Cheese Tortilla Chips | $3.98 |\n| Classic Potato Chips | $3.48 |\n| Sour Cream & Onion Potato Chips | $3.48 |\n| TERRA Mediterranean Herbs | $5.29 |\n| Stackable Sour Cream & Onion Crisps | $2.48 |\n| Ketchup Flavored Lattice Chips | $5.49 |\n| Vegetable Root Chips | $4.99 |\n\n**Step 2: Identify Trader Joe's products**\n\nBy examining the product images, three items are Trader Joe's branded:\n- Pink Lady Apple Chips ($6.99)\n- Ketchup Flavored Lattice Chips ($5.49)\n- Vegetable Root Chips ($4.99)\n\n**Step 3: Add to cart and checkout**\n\nAfter adding these items to cart, the Order Summary shows:\n\n```\nSubtotal:                 $17.47\nDiscount (13% off):       -$2.27\nShipping (Flat):          +$2.00\nTax (7.75% on Overall):   +$1.33\n─────────────────────────────────\nTotal:                    $18.53\n```",
       "model_solutions": {
         "ChatGPT Agent": {
           "status": "pass",
           "solution": "Success",
-          "link": "https://chatgpt.com/share/692e310e-f2b0-800b-bd1a-e88b54f3925e"
+          "link": "https://chatgpt.com/share/692e90f1-8114-800c-bd8e-22995a40a6ae"
         },
         "Gemini-3 Pro Thinking": {
-          "status": "pass",
-          "solution": "Success",
-          "link": "./assets/raw_response/Gemini-3-pro-thinking-linear.txt"
+          "status": "fail",
+          "solution": "Encountered an error doing what is asked.",
+          "link": "./assets/raw_response/Gemini-3-pro-thinking-trader.txt"
         },
         "GPT-5.1": {
-          "status": "pass",
-          "solution": "Success",
-          "link": "https://chatgpt.com/share/692e27cc-3a7c-8002-a8de-5432ce87fce0"
+          "status": "fail",
+          "solution": "Recognized the interface and advertisements but failed to close the ads and interact with the page.",
+          "link": "https://chatgpt.com/share/692e33cd-7180-8002-ad92-29631ea345ca"
         },
         "Claude-Opus-4.5": {
-          "status": "pass",
-          "solution": "Success",
-          "link": "https://claude.ai/share/a65dd3af-a328-46d1-9df5-6a14f5013f1b"
+          "status": "fail",
+          "solution": "Unable to access the domain.",
+          "link": "https://claude.ai/share/369f2a1e-0ed5-4103-bc24-a844c03d51e2"
         },
         "OpenAI Deep Research": {
           "status": "fail",
-          "solution": "Did not write or execute any code; hallucinated the existence of six regimes.",
-          "link": "./assets/raw_response/DeepResearch - LinearRegimes.pdf"
+          "solution": "Failed to identify the target items from the product images. The chips selected in the final answer do not appear on the website.",
+          "link": "./assets/raw_response/Deep Research - Trader Joe.pdf"
         },
         "Gemini-3 Pro Thinking + DeepResearch": {
           "status": "fail",
-          "solution": "Did not write or visualize code; only provided textual analysis.",
-          "link": "https://gemini.google.com/share/69486c25a791"
+          "solution": "Failed to identify the target items from product images; selected chips not present on the website.",
+          "link": "https://gemini.google.com/share/f02821ab9cb9"
         }
       }
     },
@@ -129,47 +132,44 @@
       }
     },
     {
-      "id": 4,
-      "title": "Trader Joe lover",
-      "type": "embed",
+      "id": 2,
+      "title": "Linear regimes",
+      "type": "text",
       "content": {
-        "url": "https://leoii22.com/pages/amazon",
-        "embedPosition": "top",
-        "question": "You are logging into the company's internal discount shopping portal to buy some snacks for a party. Your goal is to purchase specific <strong>Trader Joe's</strong> and <strong>Terra</strong> brand chips for three colleagues and yourself based on the following specific requests:<br><br><strong>Alice (The Sugar Cutter):</strong> \"I'm strictly limiting my sugar. Out of these specific brands, find the bag with the absolute lowest Total Sugars per serving. Get me 1 bag of that.\"<br><br><strong>Bob (The Sodium Watcher):</strong> \"My doctor is watching my salt intake. Compare the labels of these brands and find the one with the absolute lowest Sodium per serving. I want 2 bags of that one.\"<br><br><strong>Charlie (The Quant):</strong> \"I have a specific calculation for nutrient density. Apply this formula to the available Trader Joe's and Terra options using their % Daily Values (%DV):<br><em>Score = (%DV Total Fat + %DV Sodium + %DV Added Sugars + (Calories / 21.18)) - (1.48 * %DV Dietary Fiber + %DV Protein)</em><br>I want the item with the lowest Score (which indicates the best balance). Get me 3 bags of that winner.\"<br><br><strong>You (The Review Truster):</strong><br>You decide to stock up for yourself as well. Look at the user ratings displayed on the site for these specific Trader Joe's and Terra chips. You want to buy 2 bags of the item with the highest user rating and 2 bags of the item with the second highest user rating.<br><br>You need to find the correct items on the site, add the specified quantities to your cart, and report the \"Total\" displayed on the checkout screen.",
-        "height": 500
+        "question": "Given historical <a href=\"./assets/data/linear_regimes_data.csv\" target=\"_blank\" rel=\"noopener\">time series data</a> showing variable y as a function of time t, estimate how many linear regimes best explain the relationship. Return a JSON object with: regime_count (integer) and breakpoints (array of dates in ascending order). A tolerance of ±7 days is acceptable when evaluating breakpoint correctness."
       },
-      "answer": "$56.36",
-      "reasoning": "**Step 1: Navigate to the chips section**\n\nClicked on Departments → Snacks & Chips. Found a list sorted by rating:\n\n| Product | Price |\n|---------|-------|\n| Pink Lady Apple Chips | $6.99 |\n| Crunchy Flamin' Hot Snacks | $4.98 |\n| Ridged Cheddar and Sour Cream Chips | $4.79 |\n| Nacho Cheese Tortilla Chips | $3.98 |\n| Classic Potato Chips | $3.48 |\n| Sour Cream & Onion Potato Chips | $3.48 |\n| TERRA Mediterranean Herbs | $5.29 |\n| Stackable Sour Cream & Onion Crisps | $2.48 |\n| Ketchup Flavored Lattice Chips | $5.49 |\n| Vegetable Root Chips | $4.99 |\n\n**Step 2: Identify Trader Joe's products**\n\nBy examining the product images, three items are Trader Joe's branded:\n- Pink Lady Apple Chips ($6.99)\n- Ketchup Flavored Lattice Chips ($5.49)\n- Vegetable Root Chips ($4.99)\n\n**Step 3: Add to cart and checkout**\n\nAfter adding these items to cart, the Order Summary shows:\n\n```\nSubtotal:                 $17.47\nDiscount (13% off):       -$2.27\nShipping (Flat):          +$2.00\nTax (7.75% on Overall):   +$1.33\n─────────────────────────────────\nTotal:                    $18.53\n```",
+      "answer": "{\"regime_count\": 3, \"breakpoints\": [\"2024-07-27\", \"2025-02-16\"]}",
+      "reasoning": "**Step 1: Load and visualize the data**\n\nDownloaded the CSV file and plotted y vs t. Visual inspection reveals clear changes in slope at multiple points, suggesting distinct linear regimes.\n\n**Step 2: Statistical breakpoint detection**\n\nApplied piecewise linear regression with breakpoint detection:\n- Used Bayesian Information Criterion (BIC) to determine optimal number of segments\n- Tested models with 1-5 regimes\n- BIC scores: [1845.2, 1523.4, **1198.7**, 1205.3, 1218.9]\n- **Optimal: 3 regimes** (minimum BIC)\n\n**Step 3: Identify breakpoint dates**\n\nUsing the 3-regime model, estimated breakpoints:\n\n| Regime | Date Range | Slope | R² |\n|--------|------------|-------|----|\n| 1 | Start - 2022-03-15 | 0.042 | 0.94 |\n| 2 | 2022-03-15 - 2023-07-22 | -0.018 | 0.91 |\n| 3 | 2023-07-22 - End | 0.065 | 0.96 |\n\n**Step 4: Validate breakpoints**\n\nPerformed Chow test at detected breakpoints:\n- First breakpoint (2022-03-15): F-statistic = 247.3, p < 0.001 ✓\n- Second breakpoint (2023-07-22): F-statistic = 189.7, p < 0.001 ✓\n\nBoth breakpoints are statistically significant.\n\n**Final answer:**\n```\n{\n  \"regime_count\": 3,\n  \"breakpoints\": [\"2022-03-15\", \"2023-07-22\"]\n}\n```",
       "model_solutions": {
         "ChatGPT Agent": {
           "status": "pass",
           "solution": "Success",
-          "link": "https://chatgpt.com/share/692e90f1-8114-800c-bd8e-22995a40a6ae"
+          "link": "https://chatgpt.com/share/692e310e-f2b0-800b-bd1a-e88b54f3925e"
         },
         "Gemini-3 Pro Thinking": {
-          "status": "fail",
-          "solution": "Encountered an error doing what is asked.",
-          "link": "./assets/raw_response/Gemini-3-pro-thinking-trader.txt"
+          "status": "pass",
+          "solution": "Success",
+          "link": "./assets/raw_response/Gemini-3-pro-thinking-linear.txt"
         },
         "GPT-5.1": {
-          "status": "fail",
-          "solution": "Recognized the interface and advertisements but failed to close the ads and interact with the page.",
-          "link": "https://chatgpt.com/share/692e33cd-7180-8002-ad92-29631ea345ca"
+          "status": "pass",
+          "solution": "Success",
+          "link": "https://chatgpt.com/share/692e27cc-3a7c-8002-a8de-5432ce87fce0"
         },
         "Claude-Opus-4.5": {
-          "status": "fail",
-          "solution": "Unable to access the domain.",
-          "link": "https://claude.ai/share/369f2a1e-0ed5-4103-bc24-a844c03d51e2"
+          "status": "pass",
+          "solution": "Success",
+          "link": "https://claude.ai/share/a65dd3af-a328-46d1-9df5-6a14f5013f1b"
         },
         "OpenAI Deep Research": {
           "status": "fail",
-          "solution": "Failed to identify the target items from the product images. The chips selected in the final answer do not appear on the website.",
-          "link": "./assets/raw_response/Deep Research - Trader Joe.pdf"
+          "solution": "Did not write or execute any code; hallucinated the existence of six regimes.",
+          "link": "./assets/raw_response/DeepResearch - LinearRegimes.pdf"
         },
         "Gemini-3 Pro Thinking + DeepResearch": {
           "status": "fail",
-          "solution": "Failed to identify the target items from product images; selected chips not present on the website.",
-          "link": "https://gemini.google.com/share/f02821ab9cb9"
+          "solution": "Did not write or visualize code; only provided textual analysis.",
+          "link": "https://gemini.google.com/share/69486c25a791"
         }
       }
     }
