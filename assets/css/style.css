@@ -6,7 +6,8 @@
     --font-mono: "JetBrains Mono", "Courier New", monospace;
     --color-text: #1a1a1a;
     --color-link: #1a1a1a;
-    --color-bg: #ffffff;
+    --color-bg: #FDFAF8;
+    --color-surface: #F5EFE9;
     --color-accent: #e5e5e5;
     --width-content: 720px; /* content width */
     --width-wide: 1200px;   /* leaderboard width */
@@ -136,9 +137,11 @@ header {
 header nav a {
     margin-left: 35px;
     text-decoration: none;
-    color: #888;
-    font-family: var(--font-main);
-    font-size: 17px;
+    color: #aaa;
+    font-family: Manrope, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
     position: relative;
     transition: color 0.2s;
 }
@@ -194,18 +197,23 @@ h1 {
 
 .subtitle {
     text-align: center;
-    color: var(--slate);
-    font-style: normal;
-    font-size: 18px;
-    margin: 0 0 18px;
+    color: var(--cocoa-light);
+    font-style: italic;
+    font-size: 17px;
+    margin: 4px 0 22px;
+    letter-spacing: 0.01em;
 }
 
 h2 {
-    font-size: 24px;
-    font-weight: normal;
-    margin-top: 40px;
-    border-bottom: 1px solid var(--color-text);
-    padding-bottom: 10px;
+    font-family: Manrope, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cocoa-mid);
+    margin-top: 60px;
+    margin-bottom: 20px;
+    padding-bottom: 0;
 }
 
 p {
@@ -228,41 +236,49 @@ a {
 
 .resource-links {
     display: flex;
-    gap: 32px;
+    gap: 10px;
     justify-content: center;
-    margin: 16px 0 12px;
+    flex-wrap: wrap;
+    margin: 0 0 52px;
 }
 
 .resource-link {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 24px;
+    gap: 6px;
+    padding: 5px 14px;
     text-decoration: none;
-    font-size: 16px;
-    color: var(--color-text);
-    background: #f8f8f8;
-    border-radius: 8px;
-    transition: all 0.2s ease;
+    font-family: Manrope, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #7a6057;
+    background: transparent;
+    border: 1px solid #d4c4bc;
+    border-radius: 20px;
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+    letter-spacing: 0.01em;
 }
 
 @media (hover: hover) and (pointer: fine) {
     .resource-link:hover {
-        background: var(--color-text);
-        color: #fff;
+        border-color: var(--cocoa-mid);
+        color: var(--cocoa-dark);
+        background: #faf7f5;
     }
 }
 
 /* Touch device: use active state instead */
 @media (hover: none) {
     .resource-link:active {
-        background: var(--color-text);
-        color: #fff;
+        border-color: var(--cocoa-mid);
+        color: var(--cocoa-dark);
+        background: #faf7f5;
     }
 }
 
 .resource-link svg {
     flex-shrink: 0;
+    opacity: 0.7;
 }
 
 /* Table wrapper for horizontal scroll */
@@ -476,11 +492,11 @@ tbody tr {
 }
 
 .result-block.pass {
-    background: #66BB6A;
+    background: #8EBB91;
 }
 
 .result-block.fail {
-    background: #EF5350;
+    background: #C97A78;
 }
 
 /* Column hover effect */
@@ -502,13 +518,18 @@ thead th.col-hover {
     max-width: 100%;
     height: auto;
     border-radius: 8px;
-    border: 1px solid #e5e5e5;
+    mix-blend-mode: multiply;
+}
+
+.figure-block img {
+    mix-blend-mode: multiply;
 }
 
 .figure-block figcaption {
     margin-top: 12px;
-    font-size: 14px;
-    color: #666;
+    font-family: Manrope, sans-serif;
+    font-size: 13px;
+    color: #9a8278;
     font-style: italic;
     line-height: 1.5;
 }
@@ -708,10 +729,13 @@ thead th.col-hover {
 
 /* h3 styling */
 h3 {
-    font-size: 20px;
-    font-weight: 600;
+    font-family: var(--font-main);
+    font-size: 18px;
+    font-weight: normal;
+    font-style: italic;
+    color: var(--cocoa-dark);
     margin-top: 32px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 }
 
 /* ============================================
@@ -878,8 +902,9 @@ h3 {
 /* Citation block */
 .citation-block {
     position: relative;
-    background: #f9f9f9;
-    border-left: 3px solid #333;
+    background: var(--color-surface);
+    border-left: 2px solid var(--cocoa-light);
+    border-radius: 0 6px 6px 0;
     margin: 20px 0;
 }
 
@@ -1296,14 +1321,11 @@ h3 {
     }
 
     .resource-links {
-        flex-wrap: wrap;
-        gap: 12px;
-        margin: 16px 0 12px;
+        gap: 8px;
     }
 
     .resource-link {
-        padding: 10px 18px;
-        font-size: 14px;
+        font-size: 13px;
     }
 
     /* Leaderboard legend */
@@ -1843,7 +1865,7 @@ h3 {
 
 /* Gallery container - unified background for grid and solution */
 .gallery-container {
-    background: #f9f9f9;
+    background: #F5EFE9;
     border-radius: 12px;
 }
 
@@ -1879,22 +1901,24 @@ h3 {
 }
 
 .gallery-legend-swatch.pass {
-    background: #66BB6A;
+    background: #8EBB91;
 }
 
 .gallery-legend-swatch.fail {
-    background: #EF5350;
+    background: #C97A78;
 }
 
 .gallery-legend-label {
-    font-size: 13px;
-    color: #555;
+    font-family: Manrope, sans-serif;
+    font-size: 12px;
+    color: #8D6E63;
     margin-right: 4px;
 }
 
 .gallery-legend-text {
-    font-size: 12px;
-    color: #777;
+    font-family: Manrope, sans-serif;
+    font-size: 11px;
+    color: #aaa;
     text-align: right;
 }
 
@@ -1902,7 +1926,7 @@ h3 {
     width: 100%;
     min-width: 0; /* Override global table min-width */
     border-collapse: collapse;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #ddd3c8;
 }
 
 .gallery-grid th,
@@ -1928,9 +1952,11 @@ h3 {
 }
 
 .gallery-example-header {
+    font-family: Manrope, sans-serif;
     font-weight: 600;
-    font-size: clamp(11px, 1.3vw, 13px);
-    color: var(--color-text);
+    font-size: clamp(10px, 1.2vw, 12px);
+    letter-spacing: 0.03em;
+    color: var(--cocoa-light);
     white-space: normal;
     line-height: 1.35;
     word-break: break-word;
@@ -1938,7 +1964,7 @@ h3 {
 }
 
 .gallery-model-row {
-    border-bottom: 1px solid #e8e8e8;
+    border-bottom: 1px solid #ddd3c8;
     transition: background-color 0.15s ease;
 }
 
@@ -1952,7 +1978,7 @@ h3 {
 
 @media (hover: hover) and (pointer: fine) {
     .gallery-model-row:hover {
-        background-color: rgba(255, 255, 255, 0.5);
+        background-color: rgba(255, 250, 245, 0.6);
     }
 }
 
@@ -1977,9 +2003,10 @@ h3 {
 }
 
 .gallery-model-name {
+    font-family: Manrope, sans-serif;
     font-weight: 600;
-    font-size: 14px;
-    color: var(--color-text);
+    font-size: 13px;
+    color: var(--cocoa-dark);
     line-height: 1.3;
 }
 
@@ -1989,9 +2016,10 @@ h3 {
 }
 
 .gallery-model-cell .model-main-name {
+    font-family: Manrope, sans-serif;
     font-weight: 600;
-    font-size: 14px;
-    color: var(--color-text);
+    font-size: 13px;
+    color: var(--cocoa-dark);
 }
 
 .gallery-model-cell .model-subtitle {
@@ -2022,15 +2050,15 @@ h3 {
 }
 
 .result-block-mini.pass {
-    background: #66BB6A;
+    background: #8EBB91;
 }
 
 .result-block-mini.fail {
-    background: #EF5350;
+    background: #C97A78;
 }
 
 .result-block-mini.na {
-    background: #e0e0e0;
+    background: #d4c5bb;
     cursor: default;
 }
 
@@ -2085,20 +2113,22 @@ h3 {
     display: flex;
     align-items: center;
     gap: 4px;
-    padding: 5px 12px;
+    padding: 4px 10px;
     border-radius: 14px;
-    font-size: 13px;
+    font-family: Manrope, sans-serif;
+    font-size: 12px;
     font-weight: 600;
+    letter-spacing: 0.02em;
 }
 
 .solution-status.pass {
-    background: #E8F5E9;
-    color: #2E7D32;
+    background: #EDF3EE;
+    color: #4A7A4D;
 }
 
 .solution-status.fail {
-    background: #FFEBEE;
-    color: #C62828;
+    background: #F5EEEE;
+    color: #8F4A48;
 }
 
 .status-icon {
@@ -2107,11 +2137,11 @@ h3 {
 
 /* Collapsible Solution Details */
 .solution-details {
-    background: #fff;
+    background: #FDFAF8;
     border-radius: 10px;
     margin: 0;
     overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 1px 3px rgba(62, 39, 35, 0.06);
     transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
@@ -2152,8 +2182,10 @@ h3 {
 }
 
 .solution-model-name {
+    font-family: Manrope, sans-serif;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
+    color: var(--cocoa-dark);
     white-space: nowrap;
 }
 

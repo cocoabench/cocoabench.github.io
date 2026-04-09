@@ -61,7 +61,6 @@
         <a href="index.html" class="logo"></a>
         <nav>
             <a href="index.html" class="active">Introduction</a>
-            <a href="leaderboard.html">Leaderboard</a>
             <a href="blog.html">Blog</a>
         </nav>
     </header>
@@ -70,7 +69,7 @@
         <p class="subtitle">Evaluating Unified Digital Agents in the Wild</p>
         <div class="resource-links">
             <a href="blog.html" class="resource-link">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                     <polyline points="14 2 14 8 20 8"></polyline>
                     <line x1="16" y1="13" x2="8" y2="13"></line>
@@ -79,33 +78,46 @@
                 Blog
             </a>
             <a href="https://github.com/cocoabench/cocoa-agent" class="resource-link">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                 </svg>
-                GitHub
+                Code
             </a>
             <a href="https://github.com/cocoabench/cocoa-agent/tree/main/cocoabench-v0.2" class="resource-link">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
                     <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
                     <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
                 </svg>
-                Dataset
+                Data
+            </a>
+            <a href="" class="resource-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 20h9"></path>
+                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                </svg>
+                Paper
             </a>
         </div>
         <h2>Overview</h2>
+        <p>
+            CocoaBench is a benchmark for unified digital agents built from 153 human-designed, long-horizon tasks that require flexible composition of <strong>vision</strong>, <strong>search</strong>, and <strong>coding</strong>.
+        </p>
         <ul>
-            <li>Evaluates <strong>unified digital agents</strong> that combine GUI interaction, coding, and tool use.</li>
-            <li>Features long-horizon tasks, diverse scenarios, and challenging levels of difficulty (<a href="#examples">examples</a>).</li>
-            <li>Provides an <a href="https://github.com/cocoabench/cocoa-agent">agent framework</a> and a sandboxed environment for reproducible evaluation.</li>
+            <li><strong>Minimal specification, automatic evaluation.</strong> Each task is defined only by an instruction and a verifiable evaluation script over the agent's final output. No fixed infrastructure or tool ecosystem is assumed, and correctness does not rely on LLM judges or human review.</li>
+            <li><strong>Compositional by design.</strong> 98% of tasks require multiple capabilities. Agents must compose vision (GUI interaction, visual grounding), search (web navigation, information synthesis), and coding (terminal use, programmatic analysis) within a single run (<a href="#examples">see examples</a>).</li>
+            <li><strong>Cocoa-Agent scaffold.</strong> We provide <a href="https://github.com/cocoabench/cocoa-agent">Cocoa-Agent</a>, a lightweight framework integrated with <a href="https://github.com/agent-infra/sandbox">Sandbox-AIO</a>, enabling controlled comparison across model backbones and reproducible parallel evaluation.</li>
         </ul>
+        <p>
+            Experiments show that current agents remain far from reliable on CocoaBench. The best evaluated system achieves only <strong>45.1% success rate</strong>, with substantial room for improvement in reasoning &amp; planning, tool use &amp; execution, and visual grounding.
+        </p>
         <!-- <figure class="figure-block">
             <img src="https://placehold.co/720x360/f4f4f4/888?text=CocoaBench+Architecture&font=roboto" alt="CocoaBench Architecture Diagram" class="figure-image">
             <figcaption>Figure 1: CocoaBench Architecture Diagram — showing the interaction between agents, environments, and evaluation metrics.</figcaption>
         </figure> -->
         <h2 id="examples">Examples</h2>
         <p>
-            Here are some example tasks from CocoaBench, showcasing the diverse reasoning challenges our benchmark presents.
+            Here are some example tasks (excluded from CocoaBench to avoid contamination), showcasing the diverse reasoning challenges our benchmark presents.
         </p>
         <div id="example-showcase" class="example-showcase">
             <!-- Populated by examples.js -->
@@ -113,10 +125,14 @@
 
         <h2>Evaluation</h2>
         <p>
-            We currently evaluate several leading commercial agent systems on CocoaBench-v0.1 (25 tasks, not including the examples). A more detailed breakdown is shown in the <a href="leaderboard.html">leaderboard</a>.
+            We evaluate representative agent systems on CocoaBench v1.0 (153 tasks).
         </p>
-        <h3>Performance Summary</h3>
-        <div id="performance-chart" class="performance-chart">
+        <h3>Existing Agents</h3>
+        <div id="chart-existing" class="perf-figure-wrap">
+            <!-- Populated by chart.js -->
+        </div>
+        <h3>Cocoa-Agent</h3>
+        <div id="chart-cocoa" class="perf-figure-wrap">
             <!-- Populated by chart.js -->
         </div>
 
@@ -126,42 +142,6 @@
         <div id="solution-gallery" class="solution-gallery">
             <!-- Populated by gallery.js -->
         </div>
-
-        <h2>Contributors</h2>
-        <p>
-            <a href="https://ber666.github.io/" target="_blank">Shibo Hao</a>*,
-            <a href="https://zhining.space/" target="_blank">Zhining Zhang</a>*,
-            <a href="https://www.linkedin.com/in/zhiqi-liang-6a0446341" target="_blank">Zhiqi Liang</a>*,
-            <a href="https://leolty.github.io/" target="_blank">Tianyang Liu</a>*,
-            <a href="https://zilongwang.me/" target="_blank">Zilong Wang</a>*,
-            <a href="https://lancelot39.github.io/" target="_blank">Kun Zhou</a>,
-            <a href="https://yuh-zha.github.io/" target="_blank">Yuheng Zha</a>,
-            <a href="https://scholar.google.com/citations?user=-zquUaEAAAAJ&hl=en" target="_blank">Qiyue Gao</a>,
-            <a href="https://chenjix.github.io/" target="_blank">Jixuan Chen</a>,
-            <a href="https://blankcheng.github.io/" target="_blank">Zhoujun Cheng</a>,
-            <a href="https://scholar.google.com/citations?user=n1pDIggAAAAJ&hl=en" target="_blank">Yu Wang</a>,
-            <a href="https://yaof20.github.io/" target="_blank">Feng Yao</a>,
-            <a href="https://lichengliu03.github.io/" target="_blank">Licheng Liu</a>,
-            <a href="https://mars-tin.github.io/" target="_blank">Ziqiao Ma</a>,
-            <a href="https://hunterhector.github.io/" target="_blank">Hector Liu</a>,
-            <a href="https://rupeshks.cc/" target="_blank">Rupesh Srivastava</a>,
-            <a href="https://cseweb.ucsd.edu/~jmcauley/" target="_blank">Julian McAuley</a>,
-            <a href="https://shangjingbo1226.github.io/" target="_blank">Jingbo Shang</a>,
-            <a href="https://lianhui.ucsd.edu/" target="_blank">Lianhui Qin</a>,
-            <a href="https://zhiting.ucsd.edu/" target="_blank">Zhiting Hu</a>
-        </p>
-        <p><em>(* core contributor)</em></p>
-
-        <h2>Get Involved</h2>
-        <p>
-            We are continuously building and improving CocoaBench. CocoaBench is a community-driven benchmark, and we welcome contributions from researchers and practitioners with diverse backgrounds. If you've encountered a challenging real-world problem that pushed your limits, it might make a great benchmark task!
-        </p>
-        <p>
-            We've set up a streamlined <a href="https://github.com/cocoabench/cocoa-agent/blob/main/contrib/CONTRIBUTING.md" target="_blank">task contribution protocol</a> to guide you through creating and submitting new tasks. Contributors with <strong>3 accepted tasks</strong> are eligible for co-authorship on the CocoaBench paper, which we plan to submit to a top-tier ML conference.
-        </p>
-        <p>
-            Have questions or ideas? Feel free to reach out to us or join our <a href="https://discord.gg/cbUx7pEN" target="_blank">Discord community</a> to propose new tasks or discuss ideas. (If the link doesn't work, try refreshing the page or manually add the server in Discord app using invite code: <code>cbUx7pEN</code>)
-        </p>
 
         <h2>Citation</h2>
         <div class="citation-block">

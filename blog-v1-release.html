@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CocoaBench v1.0 is here — 153 tasks evaluating unified digital agents across vision, search, and coding.">
+    <link rel="canonical" href="https://cocoabench.github.io/blog-v1-release.html">
+    <title>CocoaBench v1.0 Released | CocoaBench</title>
+    <meta property="og:title" content="CocoaBench v1.0 Released">
+    <meta property="og:description" content="CocoaBench v1.0 is here — 153 tasks evaluating unified digital agents across vision, search, and coding.">
+    <meta property="og:url" content="https://cocoabench.github.io/blog-v1-release.html">
+    <meta property="og:site_name" content="CocoaBench">
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2026-04-07">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo"></a>
+        <nav>
+            <a href="index.html">Introduction</a>
+            <a href="blog.html">Blog</a>
+        </nav>
+    </header>
+    <div class="container">
+        <p style="font-size: 14px; color: #666; margin-bottom: 10px;">April 7, 2026</p>
+        <h1>CocoaBench v1.0</h1>
+        <p class="subtitle">By The CocoaBench Team</p>
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
+
+        <p>
+            We are releasing <strong>CocoaBench v1.0</strong>, a benchmark for evaluating unified digital agents on complex, long-horizon tasks that require flexible composition of <strong>vision</strong>, <strong>search</strong>, and <strong>coding</strong>. Our paper is available <a href="">here</a>.
+        </p>
+
+        <figure class="figure-block" style="margin: 40px 0;">
+            <img src="./assets/figures/teaser.png" alt="CocoaBench teaser: a shopping task requiring GUI interaction, vision, search, and coding" style="width: 100%; height: auto; mix-blend-mode: multiply;">
+            <figcaption><strong>Figure 1.</strong> CocoaBench evaluates agents on tasks that require flexible composition of core capabilities. The shopping example shown here illustrates the multi-step, compositional nature of the benchmark.</figcaption>
+        </figure>
+
+        <h2>What is CocoaBench?</h2>
+        <p>
+            CocoaBench consists of <strong>153 human-authored tasks</strong> spanning 9 domains — Business, Culture, Education, Life, Logic &amp; Puzzles, Science, Sports, Technology, and Travel. Each task is defined minimally: a natural language instruction and an automatic evaluation function over the agent's final output. No fixed runtime, tool ecosystem, or interaction mode is assumed, making the benchmark compatible with any agent infrastructure.
+        </p>
+        <p>
+            Unlike benchmarks that test a single capability in isolation, CocoaBench is compositional by design — 98% of tasks require agents to combine multiple capabilities within a single run. For instance, an agent might need to visually inspect a webpage, search for supplementary information online, and write code to synthesize the results into a structured answer. Evaluation is fully automatic: every task ships with a verifiable evaluation script, so correctness does not rely on LLM judges or human review.
+        </p>
+
+        <figure class="figure-block" style="margin: 40px 0;">
+            <img src="./assets/figures/task_stats.png" alt="CocoaBench task statistics: domain distribution, resource types, and capability requirements" style="width: 100%; height: auto; mix-blend-mode: multiply;">
+            <figcaption><strong>Figure 2.</strong> Statistics of CocoaBench. (a) Distribution across 9 task domains. (b) Distribution of resource types required by the tasks. (c) Human-annotated key capabilities required per task — Vision, Search, and Coding are not mutually exclusive.</figcaption>
+        </figure>
+
+        <h2>Key results</h2>
+        <p>
+            We evaluated representative existing agent systems as well as a range of model backbones under our shared <strong>Cocoa-Agent</strong> scaffold. The best-performing system — Codex and OpenClaw with GPT-5.4 as backbone — achieves only <strong>45.1% success rate</strong>, underscoring substantial room for improvement.
+        </p>
+
+        <div style="margin: 40px 0;">
+            <p style="font-size: 13px; font-family: Manrope, sans-serif; color: #9a8278; margin-bottom: 6px;">Existing Agents</p>
+            <div id="blog-chart-existing" class="perf-figure-wrap"></div>
+            <p style="font-size: 13px; font-family: Manrope, sans-serif; color: #9a8278; margin: 20px 0 6px;">Cocoa-Agent</p>
+            <div id="blog-chart-cocoa" class="perf-figure-wrap"></div>
+            <p style="font-size: 13px; font-family: Manrope, sans-serif; color: #9a8278; margin-top: 12px;"><strong>Figure 3.</strong> Overall performance on CocoaBench for representative existing agent systems (top) and model backbones under the shared Cocoa-Agent scaffold (bottom).</p>
+        </div>
+
+        <p>
+            Error analysis across 712 failure trajectories reveals three recurring failure modes:
+        </p>
+        <ul>
+            <li><strong>Strategic &amp; Planning (53%)</strong> — agents devise incorrect strategies or lose track of task requirements over long horizons.</li>
+            <li><strong>Visual Grounding (28%)</strong> — agents misread fine-grained visual details, misidentify content rendered in canvas or SVG elements, or lack the world knowledge to interpret what they perceive.</li>
+            <li><strong>Operational Failures (19%)</strong> — agents enter infinite loops, fail to recover from tool errors, or hallucinate tool outputs.</li>
+        </ul>
+
+        <figure class="figure-block" style="margin: 40px 0;">
+            <img src="./assets/figures/error_donut.png" alt="Error distribution across Cocoa-Agent evaluated models" style="width: 70%; height: auto; display: block; margin: 0 auto; mix-blend-mode: multiply;">
+            <figcaption><strong>Figure 4.</strong> Aggregate failure distribution across all models evaluated under Cocoa-Agent. The inner ring shows the three top-level failure categories; the outer ring details fine-grained subcategories.</figcaption>
+        </figure>
+
+        <p>
+            Notably, stronger models allocate a higher share of actions to code execution, suggesting that programmatic processing is a key strategy for the structured reasoning and output formatting CocoaBench tasks demand.
+        </p>
+
+        <h2>Cocoa-Agent</h2>
+        <p>
+            Alongside the benchmark, we release <strong><a href="https://github.com/cocoabench/cocoa-agent">Cocoa-Agent</a></strong>, a lightweight shared scaffold built on top of <a href="https://github.com/agent-infra/sandbox">AIO Sandbox</a> — an all-in-one Docker runtime that integrates browser, shell, and file system in a single container. Cocoa-Agent adopts a ReAct-based loop with both DOM-level and screenshot-based GUI control, terminal execution, file manipulation, and sandboxed code execution. Its modular design enables controlled backbone comparisons and reproducible parallel evaluation.
+        </p>
+
+        <h2>What's next</h2>
+        <p>
+            CocoaBench is a living benchmark. We plan to expand the task set, add new domains, and keep evaluation resources stable over time. We welcome the community to run their agents on CocoaBench and contribute new tasks — see the <a href="https://github.com/cocoabench/cocoa-agent/blob/main/contrib/CONTRIBUTING.md" target="_blank">contribution guide</a> for details.
+        </p>
+        <p>
+            Join the discussion on our <a href="https://discord.gg/cbUx7pEN" target="_blank">Discord</a>.
+        </p>
+
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
+        <p style="font-size: 14px; color: #999;">
+            ← <a href="blog.html">All posts</a>
+        </p>
+    </div>
+    <footer class="site-footer">
+        <p>Built by the CocoaBench Team</p>
+        <p class="footer-credits">Design inspired by <a href="https://thinkingmachines.ai/" target="_blank" rel="noopener">Thinking Machines</a> and <a href="https://openai.com/" target="_blank" rel="noopener">OpenAI</a></p>
+    </footer>
+    <script src="./assets/js/logo.js"></script>
+    <script src="./assets/js/chart.js"></script>
+    <script>
+    // Wire up blog-specific chart container IDs after chart.js initialises
+    (function () {
+        function buildBlogCharts() {
+            if (typeof buildPerfFigure === 'function') {
+                buildPerfFigure('blog-chart-existing', 'existing');
+                buildPerfFigure('blog-chart-cocoa', 'cocoa');
+            }
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', buildBlogCharts);
+        } else {
+            buildBlogCharts();
+        }
+    })();
+    </script>
+</body>
+</html>
