@@ -91,7 +91,7 @@
                 </svg>
                 Data
             </a>
-            <a href="" class="resource-link">
+            <a href="https://raw.githubusercontent.com/cocoabench/cocoa-agent/main/cocoabench.pdf" class="resource-link">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M12 20h9"></path>
                     <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
@@ -104,9 +104,9 @@
             CocoaBench is a benchmark for unified digital agents built from 153 human-designed, long-horizon tasks that require flexible composition of <strong>vision</strong>, <strong>search</strong>, and <strong>coding</strong>.
         </p>
         <ul>
-            <li><strong>Minimal specification, automatic evaluation.</strong> Each task is defined only by an instruction and a verifiable evaluation script over the agent's final output. No fixed infrastructure or tool ecosystem is assumed, and correctness does not rely on LLM judges or human review.</li>
-            <li><strong>Compositional by design.</strong> 98% of tasks require multiple capabilities. Agents must compose vision (GUI interaction, visual grounding), search (web navigation, information synthesis), and coding (terminal use, programmatic analysis) within a single run (<a href="#examples">see examples</a>).</li>
-            <li><strong>Cocoa-Agent scaffold.</strong> We provide <a href="https://github.com/cocoabench/cocoa-agent">Cocoa-Agent</a>, a lightweight framework integrated with <a href="https://github.com/agent-infra/sandbox">Sandbox-AIO</a>, enabling controlled comparison across model backbones and reproducible parallel evaluation.</li>
+            <li><strong>Compositional by design.</strong> Most tasks require the combinatino of vision (GUI interaction, visual understanding), search (information synthesis), and coding (terminal use, algorithms).</li>
+            <li><strong>Minimal specification, automatic evaluation.</strong> Each task is defined only by an instruction and an evaluation script over the response. No fixed infrastructure is assumed. No LLM as judge.</li>
+            <li><strong>Cocoa-Agent scaffold.</strong> We build <a href="https://github.com/cocoabench/cocoa-agent">Cocoa-Agent</a>, a lightweight framework integrated with <a href="https://github.com/agent-infra/sandbox">Sandbox-AIO</a>, enabling controlled comparison across backbones and reproducible evaluation.</li>
         </ul>
         <p>
             Experiments show that current agents remain far from reliable on CocoaBench. The best evaluated system achieves only <strong>45.1% success rate</strong>, with substantial room for improvement in reasoning &amp; planning, tool use &amp; execution, and visual grounding.
@@ -143,8 +143,8 @@
             <!-- Populated by gallery.js -->
         </div>
 
-        <h2>Citation</h2>
-        <div class="citation-block">
+        <h2 style="display:none;">Citation</h2>
+        <div class="citation-block" style="display:none;">
             <button class="copy-btn" onclick="copyCitation()" title="Copy to clipboard">
                 <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
